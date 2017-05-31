@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="2" >
+
+    <dataSet config="main" >
+        <source path="/bitrise/src/hello1/src/main/assets" />
+    </dataSet>
+    <dataSet config="release" >
+        <source path="/bitrise/src/hello1/src/release/assets" />
+    </dataSet>
+
+</merger>

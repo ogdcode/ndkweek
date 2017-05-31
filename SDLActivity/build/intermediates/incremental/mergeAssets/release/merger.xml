@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="2" >
+
+    <dataSet config="main" >
+        <source path="/bitrise/src/SDLActivity/src/main/assets" >
+            <file
+                name="image.bmp"
+                path="/bitrise/src/SDLActivity/src/main/assets/image.bmp" />
+        </source>
+    </dataSet>
+    <dataSet config="release" >
+        <source path="/bitrise/src/SDLActivity/src/release/assets" />
+    </dataSet>
+
+</merger>

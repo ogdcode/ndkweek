@@ -1,0 +1,35 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.11.+'
+    }
+}
+apply plugin: 'android'
+
+android {
+
+    lintOptions {
+      abortOnError false
+    }
+
+    compileSdkVersion 'android-17'
+    buildToolsVersion '25.0.3'
+
+    buildTypes {
+        release {
+            runProguard false
+            proguardFile getDefaultProguardFile('proguard-android.txt')
+        }
+    }
+    defaultConfig {
+      ndk {
+        moduleName "main"
+      }
+      sourceSets.main {
+        jni.srcDirs = []
+        jniLibs.srcDir "libs"
+      }
+    }
+}

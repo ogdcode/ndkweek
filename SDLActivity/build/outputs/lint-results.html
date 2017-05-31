@@ -1,0 +1,1556 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Lint Report</title>
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto" />
+<link rel="stylesheet" type="text/css" href="lint-results_files/hololike.css" />
+<script language="javascript" type="text/javascript"> 
+<!--
+function reveal(id) {
+if (document.getElementById) {
+document.getElementById(id).style.display = 'block';
+document.getElementById(id+'Link').style.display = 'none';
+}
+}
+//--> 
+</script>
+</head>
+<body>
+<h1>Lint Report</h1>
+<div class="titleSeparator"></div>
+Check performed at Wed May 31 03:07:49 UTC 2017.<br/>
+115 errors and 25 warnings found:<br/><br/>
+<table class="overview">
+<tr><td></td><td class="categoryColumn"><a href="#Correctness">Correctness</a>
+</td></tr>
+<tr>
+<td class="countColumn">22</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
+<a href="#InlinedApi">InlinedApi: Using inlined constants on older versions</a>
+</td></tr>
+<tr>
+<td class="countColumn">115</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-error.png" alt="Error" />
+<a href="#NewApi">NewApi: Calling new methods on older versions</a>
+</td></tr>
+<tr><td></td><td class="categoryColumn"><a href="#Performance">Performance</a>
+</td></tr>
+<tr>
+<td class="countColumn">1</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
+<a href="#UnusedResources">UnusedResources: Unused resources</a>
+</td></tr>
+<tr><td></td><td class="categoryColumn"><a href="#Accessibility">Accessibility</a>
+</td></tr>
+<tr>
+<td class="countColumn">1</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
+<a href="#ClickableViewAccessibility">ClickableViewAccessibility: Accessibility in Custom Views</a>
+</td></tr>
+<tr><td></td><td class="categoryColumn"><a href="#Internationalization">Internationalization</a>
+</td></tr>
+<tr>
+<td class="countColumn">1</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
+<a href="#HardcodedText">HardcodedText: Hardcoded text</a>
+</td></tr>
+<tr><td></td><td class="categoryColumn"><a href="#MissingIssues">Disabled Checks (14)</a>
+</td></tr></table>
+<br/>
+<a name="Correctness"></a>
+<div class="category"><a href="#" title="Return to top">Correctness</a><div class="categorySeparator"></div>
+</div>
+<a name="InlinedApi"></a>
+<div class="issue">
+<div class="id"><a href="#" title="Return to top">InlinedApi: Using inlined constants on older versions</a><div class="issueSeparator"></div>
+</div>
+<div class="warningslist">
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:377</span>: <span class="message">Field requires API level 3 (current min is 1): android.content.Context#INPUT_METHOD_SERVICE</span><br /><pre class="errorlines">
+<span class="lineno"> 374</span>                     // The sizes will be set to useful values when the keyboard is shown again.
+<span class="lineno"> 375</span>                     mTextEdit.setLayoutParams(new RelativeLayout.LayoutParams(0, 0));
+<span class="lineno"> 376</span> 
+<span class="lineno"> 377</span>                     InputMethodManager imm = (InputMethodManager) context.getSystemService(<span class="errorspan">Context.INPUT_METHOD_SERVICE);</span>
+<span class="lineno"> 378</span>                     imm.hideSoftInputFromWindow(mTextEdit.getWindowToken(), 0);
+<span class="lineno"> 379</span>                 }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:527</span>: <span class="message">Field requires API level 3 (current min is 1): android.content.Context#INPUT_METHOD_SERVICE</span><br /><pre class="errorlines">
+<span class="lineno"> 524</span>             mTextEdit.setVisibility(View.VISIBLE);
+<span class="lineno"> 525</span>             mTextEdit.requestFocus();
+<span class="lineno"> 526</span> 
+<span class="lineno"> 527</span>             InputMethodManager imm = (InputMethodManager) getContext().getSystemService(<span class="errorspan">Context.INPUT_METHOD_SERVICE);</span>
+<span class="lineno"> 528</span>             imm.showSoftInput(mTextEdit, 0);
+<span class="lineno"> 529</span>         }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:553</span>: <span class="message">Field requires API level 3 (current min is 1): android.media.AudioFormat#CHANNEL_CONFIGURATION_MONO</span><br /><pre class="errorlines">
+<span class="lineno"> 550</span>      * This method is called by SDL using JNI.
+<span class="lineno"> 551</span>      */
+<span class="lineno"> 552</span>     public static int audioOpen(int sampleRate, boolean is16Bit, boolean isStereo, int desiredFrames) {
+<span class="lineno"> 553</span>         int channelConfig = isStereo ? AudioFormat.CHANNEL_CONFIGURATION_STEREO : <span class="errorspan">AudioFormat.CHANNEL_CONFIGURATION_MONO;</span>
+<span class="lineno"> 554</span>         int audioFormat = is16Bit ? AudioFormat.ENCODING_PCM_16BIT : AudioFormat.ENCODING_PCM_8BIT;
+<span class="lineno"> 555</span>         int frameSize = (isStereo ? 2 : 1) * (is16Bit ? 2 : 1);
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:553</span>: <span class="message">Field requires API level 3 (current min is 1): android.media.AudioFormat#CHANNEL_CONFIGURATION_STEREO</span><br /><pre class="errorlines">
+<span class="lineno"> 550</span>      * This method is called by SDL using JNI.
+<span class="lineno"> 551</span>      */
+<span class="lineno"> 552</span>     public static int audioOpen(int sampleRate, boolean is16Bit, boolean isStereo, int desiredFrames) {
+<span class="lineno"> 553</span>         int channelConfig = isStereo ? <span class="errorspan">AudioFormat.CHANNEL_CONFIGURATION_STEREO : AudioFormat.CHANNEL_CONFIGURATION_MONO;</span>
+<span class="lineno"> 554</span>         int audioFormat = is16Bit ? AudioFormat.ENCODING_PCM_16BIT : AudioFormat.ENCODING_PCM_8BIT;
+<span class="lineno"> 555</span>         int frameSize = (isStereo ? 2 : 1) * (is16Bit ? 2 : 1);
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:554</span>: <span class="message">Field requires API level 3 (current min is 1): android.media.AudioFormat#ENCODING_PCM_16BIT</span><br /><pre class="errorlines">
+<span class="lineno"> 551</span>      */
+<span class="lineno"> 552</span>     public static int audioOpen(int sampleRate, boolean is16Bit, boolean isStereo, int desiredFrames) {
+<span class="lineno"> 553</span>         int channelConfig = isStereo ? AudioFormat.CHANNEL_CONFIGURATION_STEREO : AudioFormat.CHANNEL_CONFIGURATION_MONO;
+<span class="lineno"> 554</span>         int audioFormat = is16Bit ? <span class="errorspan">AudioFormat.ENCODING_PCM_16BIT : AudioFormat.ENCODING_PCM_8BIT;</span>
+<span class="lineno"> 555</span>         int frameSize = (isStereo ? 2 : 1) * (is16Bit ? 2 : 1);
+<span class="lineno"> 556</span> 
+</pre>
+<button id="InlinedApiDivLink" onclick="reveal('InlinedApiDiv');" />+ 17 More Occurrences...</button>
+<div id="InlinedApiDiv" style="display: none">
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:554</span>: <span class="message">Field requires API level 3 (current min is 1): android.media.AudioFormat#ENCODING_PCM_8BIT</span><br /><pre class="errorlines">
+<span class="lineno"> 551</span>      */
+<span class="lineno"> 552</span>     public static int audioOpen(int sampleRate, boolean is16Bit, boolean isStereo, int desiredFrames) {
+<span class="lineno"> 553</span>         int channelConfig = isStereo ? AudioFormat.CHANNEL_CONFIGURATION_STEREO : AudioFormat.CHANNEL_CONFIGURATION_MONO;
+<span class="lineno"> 554</span>         int audioFormat = is16Bit ? AudioFormat.ENCODING_PCM_16BIT : <span class="errorspan">AudioFormat.ENCODING_PCM_8BIT;</span>
+<span class="lineno"> 555</span>         int frameSize = (isStereo ? 2 : 1) * (is16Bit ? 2 : 1);
+<span class="lineno"> 556</span> 
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:566</span>: <span class="message">Field requires API level 3 (current min is 1): android.media.AudioTrack#MODE_STREAM</span><br /><pre class="errorlines">
+<span class="lineno"> 563</span> 
+<span class="lineno"> 564</span>         if (mAudioTrack == null) {
+<span class="lineno"> 565</span>             mAudioTrack = new AudioTrack(AudioManager.STREAM_MUSIC, sampleRate,
+<span class="lineno"> 566</span>                     channelConfig, audioFormat, desiredFrames * frameSize, <span class="errorspan">AudioTrack.MODE_STREAM);</span>
+<span class="lineno"> 567</span> 
+<span class="lineno"> 568</span>             // Instantiating AudioTrack can "succeed" without an exception and the track may still be invalid
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:632</span>: <span class="message">Field requires API level 3 (current min is 1): android.media.AudioFormat#CHANNEL_CONFIGURATION_MONO</span><br /><pre class="errorlines">
+<span class="lineno"> 629</span>      * This method is called by SDL using JNI.
+<span class="lineno"> 630</span>      */
+<span class="lineno"> 631</span>     public static int captureOpen(int sampleRate, boolean is16Bit, boolean isStereo, int desiredFrames) {
+<span class="lineno"> 632</span>         int channelConfig = isStereo ? AudioFormat.CHANNEL_CONFIGURATION_STEREO : <span class="errorspan">AudioFormat.CHANNEL_CONFIGURATION_MONO;</span>
+<span class="lineno"> 633</span>         int audioFormat = is16Bit ? AudioFormat.ENCODING_PCM_16BIT : AudioFormat.ENCODING_PCM_8BIT;
+<span class="lineno"> 634</span>         int frameSize = (isStereo ? 2 : 1) * (is16Bit ? 2 : 1);
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:632</span>: <span class="message">Field requires API level 3 (current min is 1): android.media.AudioFormat#CHANNEL_CONFIGURATION_STEREO</span><br /><pre class="errorlines">
+<span class="lineno"> 629</span>      * This method is called by SDL using JNI.
+<span class="lineno"> 630</span>      */
+<span class="lineno"> 631</span>     public static int captureOpen(int sampleRate, boolean is16Bit, boolean isStereo, int desiredFrames) {
+<span class="lineno"> 632</span>         int channelConfig = isStereo ? <span class="errorspan">AudioFormat.CHANNEL_CONFIGURATION_STEREO : AudioFormat.CHANNEL_CONFIGURATION_MONO;</span>
+<span class="lineno"> 633</span>         int audioFormat = is16Bit ? AudioFormat.ENCODING_PCM_16BIT : AudioFormat.ENCODING_PCM_8BIT;
+<span class="lineno"> 634</span>         int frameSize = (isStereo ? 2 : 1) * (is16Bit ? 2 : 1);
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:633</span>: <span class="message">Field requires API level 3 (current min is 1): android.media.AudioFormat#ENCODING_PCM_16BIT</span><br /><pre class="errorlines">
+<span class="lineno"> 630</span>      */
+<span class="lineno"> 631</span>     public static int captureOpen(int sampleRate, boolean is16Bit, boolean isStereo, int desiredFrames) {
+<span class="lineno"> 632</span>         int channelConfig = isStereo ? AudioFormat.CHANNEL_CONFIGURATION_STEREO : AudioFormat.CHANNEL_CONFIGURATION_MONO;
+<span class="lineno"> 633</span>         int audioFormat = is16Bit ? <span class="errorspan">AudioFormat.ENCODING_PCM_16BIT : AudioFormat.ENCODING_PCM_8BIT;</span>
+<span class="lineno"> 634</span>         int frameSize = (isStereo ? 2 : 1) * (is16Bit ? 2 : 1);
+<span class="lineno"> 635</span> 
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:633</span>: <span class="message">Field requires API level 3 (current min is 1): android.media.AudioFormat#ENCODING_PCM_8BIT</span><br /><pre class="errorlines">
+<span class="lineno"> 630</span>      */
+<span class="lineno"> 631</span>     public static int captureOpen(int sampleRate, boolean is16Bit, boolean isStereo, int desiredFrames) {
+<span class="lineno"> 632</span>         int channelConfig = isStereo ? AudioFormat.CHANNEL_CONFIGURATION_STEREO : AudioFormat.CHANNEL_CONFIGURATION_MONO;
+<span class="lineno"> 633</span>         int audioFormat = is16Bit ? AudioFormat.ENCODING_PCM_16BIT : <span class="errorspan">AudioFormat.ENCODING_PCM_8BIT;</span>
+<span class="lineno"> 634</span>         int frameSize = (isStereo ? 2 : 1) * (is16Bit ? 2 : 1);
+<span class="lineno"> 635</span> 
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:739</span>: <span class="message">Field requires API level 12 (current min is 1): android.view.InputDevice#SOURCE_CLASS_JOYSTICK</span><br /><pre class="errorlines">
+<span class="lineno"> 736</span>             return false;
+<span class="lineno"> 737</span>         }
+<span class="lineno"> 738</span>         int sources = device.getSources();
+<span class="lineno"> 739</span>         return (((sources &amp; <span class="errorspan">InputDevice.SOURCE_CLASS_JOYSTICK) == InputDevice.SOURCE_CLASS_JOYSTICK) ||</span>
+<span class="lineno"> 740</span>                 ((sources &amp; InputDevice.SOURCE_DPAD) == InputDevice.SOURCE_DPAD) ||
+<span class="lineno"> 741</span>                 ((sources &amp; InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD)
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:740</span>: <span class="message">Field requires API level 9 (current min is 1): android.view.InputDevice#SOURCE_DPAD</span><br /><pre class="errorlines">
+<span class="lineno"> 737</span>         }
+<span class="lineno"> 738</span>         int sources = device.getSources();
+<span class="lineno"> 739</span>         return (((sources &amp; InputDevice.SOURCE_CLASS_JOYSTICK) == InputDevice.SOURCE_CLASS_JOYSTICK) ||
+<span class="lineno"> 740</span>                 ((sources &amp; <span class="errorspan">InputDevice.SOURCE_DPAD) == InputDevice.SOURCE_DPAD) ||</span>
+<span class="lineno"> 741</span>                 ((sources &amp; InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD)
+<span class="lineno"> 742</span>         );
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:741</span>: <span class="message">Field requires API level 12 (current min is 1): android.view.InputDevice#SOURCE_GAMEPAD</span><br /><pre class="errorlines">
+<span class="lineno"> 738</span>         int sources = device.getSources();
+<span class="lineno"> 739</span>         return (((sources &amp; InputDevice.SOURCE_CLASS_JOYSTICK) == InputDevice.SOURCE_CLASS_JOYSTICK) ||
+<span class="lineno"> 740</span>                 ((sources &amp; InputDevice.SOURCE_DPAD) == InputDevice.SOURCE_DPAD) ||
+<span class="lineno"> 741</span>                 ((sources &amp; <span class="errorspan">InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD)</span>
+<span class="lineno"> 742</span>         );
+<span class="lineno"> 743</span>     }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1075</span>: <span class="message">Field requires API level 3 (current min is 1): android.hardware.Sensor#TYPE_ACCELEROMETER</span><br /><pre class="errorlines">
+<span class="lineno">1072</span>     }
+<span class="lineno">1073</span> 
+<span class="lineno">1074</span>     public void handlePause() {
+<span class="lineno">1075</span>         enableSensor(<span class="errorspan">Sensor.TYPE_ACCELEROMETER, false);</span>
+<span class="lineno">1076</span>     }
+<span class="lineno">1077</span> 
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1084</span>: <span class="message">Field requires API level 3 (current min is 1): android.hardware.Sensor#TYPE_ACCELEROMETER</span><br /><pre class="errorlines">
+<span class="lineno">1081</span>         requestFocus();
+<span class="lineno">1082</span>         setOnKeyListener(this);
+<span class="lineno">1083</span>         setOnTouchListener(this);
+<span class="lineno">1084</span>         enableSensor(<span class="errorspan">Sensor.TYPE_ACCELEROMETER, true);</span>
+<span class="lineno">1085</span>     }
+<span class="lineno">1086</span> 
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1210</span>: <span class="message">Field requires API level 3 (current min is 1): android.hardware.Sensor#TYPE_ACCELEROMETER</span><br /><pre class="errorlines">
+<span class="lineno">1207</span>             // Start up the C app thread and enable sensor input for the first time
+<span class="lineno">1208</span> 
+<span class="lineno">1209</span>             final Thread sdlThread = new Thread(new SDLMain(), "SDLThread");
+<span class="lineno">1210</span>             enableSensor(<span class="errorspan">Sensor.TYPE_ACCELEROMETER, true);</span>
+<span class="lineno">1211</span>             sdlThread.start();
+<span class="lineno">1212</span> 
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1485</span>: <span class="message">Field requires API level 3 (current min is 1): android.text.InputType#TYPE_CLASS_TEXT</span><br /><pre class="errorlines">
+<span class="lineno">1482</span>     public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
+<span class="lineno">1483</span>         ic = new SDLInputConnection(this, true);
+<span class="lineno">1484</span> 
+<span class="lineno">1485</span>         outAttrs.inputType = <span class="errorspan">InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;</span>
+<span class="lineno">1486</span>         outAttrs.imeOptions = EditorInfo.IME_FLAG_NO_EXTRACT_UI
+<span class="lineno">1487</span>                 | 33554432 /* API 11: EditorInfo.IME_FLAG_NO_FULLSCREEN */;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1485</span>: <span class="message">Field requires API level 3 (current min is 1): android.text.InputType#TYPE_TEXT_VARIATION_VISIBLE_PASSWORD</span><br /><pre class="errorlines">
+<span class="lineno">1482</span>     public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
+<span class="lineno">1483</span>         ic = new SDLInputConnection(this, true);
+<span class="lineno">1484</span> 
+<span class="lineno">1485</span>         outAttrs.inputType = InputType.TYPE_CLASS_TEXT | <span class="errorspan">InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;</span>
+<span class="lineno">1486</span>         outAttrs.imeOptions = EditorInfo.IME_FLAG_NO_EXTRACT_UI
+<span class="lineno">1487</span>                 | 33554432 /* API 11: EditorInfo.IME_FLAG_NO_FULLSCREEN */;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1486</span>: <span class="message">Field requires API level 3 (current min is 1): android.view.inputmethod.EditorInfo#IME_FLAG_NO_EXTRACT_UI</span><br /><pre class="errorlines">
+<span class="lineno">1483</span>         ic = new SDLInputConnection(this, true);
+<span class="lineno">1484</span> 
+<span class="lineno">1485</span>         outAttrs.inputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;
+<span class="lineno">1486</span>         outAttrs.imeOptions = <span class="errorspan">EditorInfo.IME_FLAG_NO_EXTRACT_UI</span>
+<span class="lineno">1487</span>                 | 33554432 /* API 11: EditorInfo.IME_FLAG_NO_FULLSCREEN */;
+<span class="lineno">1488</span> 
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1718</span>: <span class="message">Field requires API level 12 (current min is 1): android.view.MotionEvent#AXIS_HSCROLL</span><br /><pre class="errorlines">
+<span class="lineno">1715</span>                 action = event.getActionMasked();
+<span class="lineno">1716</span>                 switch (action) {
+<span class="lineno">1717</span>                     case MotionEvent.ACTION_SCROLL:
+<span class="lineno">1718</span>                         x = event.getAxisValue(<span class="errorspan">MotionEvent.AXIS_HSCROLL, 0);</span>
+<span class="lineno">1719</span>                         y = event.getAxisValue(MotionEvent.AXIS_VSCROLL, 0);
+<span class="lineno">1720</span>                         SDLActivity.onNativeMouse(0, action, x, y);
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1719</span>: <span class="message">Field requires API level 12 (current min is 1): android.view.MotionEvent#AXIS_VSCROLL</span><br /><pre class="errorlines">
+<span class="lineno">1716</span>                 switch (action) {
+<span class="lineno">1717</span>                     case MotionEvent.ACTION_SCROLL:
+<span class="lineno">1718</span>                         x = event.getAxisValue(MotionEvent.AXIS_HSCROLL, 0);
+<span class="lineno">1719</span>                         y = event.getAxisValue(<span class="errorspan">MotionEvent.AXIS_VSCROLL, 0);</span>
+<span class="lineno">1720</span>                         SDLActivity.onNativeMouse(0, action, x, y);
+<span class="lineno">1721</span>                         return true;
+</pre>
+</div>
+</div>
+<div class="metadata">Note: This issue has an associated quickfix operation in Eclipse/ADT&nbsp;<img alt="Fix" border="0" align="top" src="lint-results_files/lint-run.png" />
+<br>
+Priority: 6 / 10<br/>
+Category: Correctness</div>
+Severity: <span class="warning">Warning</span><div class="summary">
+Explanation: Finds inlined fields that may or may not work on older platforms.</div>
+<div class="explanation">
+This check scans through all the Android API field references in the application and flags certain constants, such as static final integers and Strings, which were introduced in later versions. These will actually be copied into the class files rather than being referenced, which means that the value is available even when running on older devices. In some cases that's fine, and in other cases it can result in a runtime crash or incorrect behavior. It depends on the context, so consider the code carefully and device whether it's safe and can be suppressed or whether the code needs tbe guarded.<br/>
+<br/>
+If you really want to use this API and don't need to support older devices just set the <code>minSdkVersion</code> in your <code>AndroidManifest.xml</code> file.<br/>
+If your code is <b>deliberately</b> accessing newer APIs, and you have ensured (e.g. with conditional execution) that this code will only ever be called on a supported platform, then you can annotate your class or method with the <code>@TargetApi</code> annotation specifying the local minimum SDK to apply, such as <code>@TargetApi(11)</code>, such that this check considers 11 rather than your manifest file's minimum SDK as the required API level.<br/>
+
+</div>
+<br/><div class="moreinfo">More info: </div><br/>To suppress this error, use the issue id "InlinedApi" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
+<a name="NewApi"></a>
+<div class="issue">
+<div class="id"><a href="#" title="Return to top">NewApi: Calling new methods on older versions</a><div class="issueSeparator"></div>
+</div>
+<div class="warningslist">
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:169</span>: <span class="message">Field requires API level 4 (current min is 1): android.os.Build.VERSION#SDK_INT</span><br /><pre class="errorlines">
+<span class="lineno"> 166</span>         // Set up the surface
+<span class="lineno"> 167</span>         mSurface = new SDLSurface(getApplication());
+<span class="lineno"> 168</span> 
+<span class="lineno"> 169</span>         if(Build.VERSION.<span class="errorspan">SDK_INT >= 12) {</span>
+<span class="lineno"> 170</span>             mJoystickHandler = new SDLJoystickHandler_API12();
+<span class="lineno"> 171</span>         }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:378</span>: <span class="message">Call requires API level 3 (current min is 1): android.view.inputmethod.InputMethodManager#hideSoftInputFromWindow</span><br /><pre class="errorlines">
+<span class="lineno"> 375</span>                     mTextEdit.setLayoutParams(new RelativeLayout.LayoutParams(0, 0));
+<span class="lineno"> 376</span> 
+<span class="lineno"> 377</span>                     InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+<span class="lineno"> 378</span>                     imm.<span class="errorspan">hideSoftInputFromWindow(mTextEdit.getWindowToken(), 0);</span>
+<span class="lineno"> 379</span>                 }
+<span class="lineno"> 380</span>                 break;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:528</span>: <span class="message">Call requires API level 3 (current min is 1): android.view.inputmethod.InputMethodManager#showSoftInput</span><br /><pre class="errorlines">
+<span class="lineno"> 525</span>             mTextEdit.requestFocus();
+<span class="lineno"> 526</span> 
+<span class="lineno"> 527</span>             InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+<span class="lineno"> 528</span>             imm.<span class="errorspan">showSoftInput(mTextEdit, 0);</span>
+<span class="lineno"> 529</span>         }
+<span class="lineno"> 530</span>     }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:562</span>: <span class="message">Call requires API level 3 (current min is 1): android.media.AudioTrack#getMinBufferSize</span><br /><pre class="errorlines">
+<span class="lineno"> 559</span>         // Let the user pick a larger buffer if they really want -- but ye
+<span class="lineno"> 560</span>         // gods they probably shouldn't, the minimums are horrifyingly high
+<span class="lineno"> 561</span>         // latency already
+<span class="lineno"> 562</span>         desiredFrames = Math.max(desiredFrames, (AudioTrack.<span class="errorspan">getMinBufferSize(sampleRate, channelConfig, audioFormat) + frameSize - 1) / frameSize);</span>
+<span class="lineno"> 563</span> 
+<span class="lineno"> 564</span>         if (mAudioTrack == null) {
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:565</span>: <span class="message">Call requires API level 3 (current min is 1): new android.media.AudioTrack</span><br /><pre class="errorlines">
+<span class="lineno"> 562</span>         desiredFrames = Math.max(desiredFrames, (AudioTrack.getMinBufferSize(sampleRate, channelConfig, audioFormat) + frameSize - 1) / frameSize);
+<span class="lineno"> 563</span> 
+<span class="lineno"> 564</span>         if (mAudioTrack == null) {
+<span class="lineno"> 565</span>             mAudioTrack = new <span class="errorspan">AudioTrack(AudioManager.STREAM_MUSIC, sampleRate,</span>
+<span class="lineno"> 566</span>                     channelConfig, audioFormat, desiredFrames * frameSize, AudioTrack.MODE_STREAM);
+<span class="lineno"> 567</span> 
+</pre>
+<button id="NewApiDivLink" onclick="reveal('NewApiDiv');" />+ 110 More Occurrences...</button>
+<div id="NewApiDiv" style="display: none">
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:572</span>: <span class="message">Call requires API level 3 (current min is 1): android.media.AudioTrack#getState</span><br /><pre class="errorlines">
+<span class="lineno"> 569</span>             // Ref: https://android.googlesource.com/platform/frameworks/base/+/refs/heads/master/media/java/android/media/AudioTrack.java
+<span class="lineno"> 570</span>             // Ref: http://developer.android.com/reference/android/media/AudioTrack.html#getState()
+<span class="lineno"> 571</span> 
+<span class="lineno"> 572</span>             if (mAudioTrack.<span class="errorspan">getState() != AudioTrack.STATE_INITIALIZED) {</span>
+<span class="lineno"> 573</span>                 Log.e(TAG, "Failed during initialization of Audio Track");
+<span class="lineno"> 574</span>                 mAudioTrack = null;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:578</span>: <span class="message">Call requires API level 3 (current min is 1): android.media.AudioTrack#play</span><br /><pre class="errorlines">
+<span class="lineno"> 575</span>                 return -1;
+<span class="lineno"> 576</span>             }
+<span class="lineno"> 577</span> 
+<span class="lineno"> 578</span>             mAudioTrack.<span class="errorspan">play();</span>
+<span class="lineno"> 579</span>         }
+<span class="lineno"> 580</span> 
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:581</span>: <span class="message">Call requires API level 3 (current min is 1): android.media.AudioTrack#getAudioFormat</span><br /><pre class="errorlines">
+<span class="lineno"> 578</span>             mAudioTrack.play();
+<span class="lineno"> 579</span>         }
+<span class="lineno"> 580</span> 
+<span class="lineno"> 581</span>         Log.v(TAG, "SDL audio: got " + ((mAudioTrack.getChannelCount() >= 2) ? "stereo" : "mono") + " " + ((mAudioTrack.<span class="errorspan">getAudioFormat() == AudioFormat.ENCODING_PCM_16BIT) ? "16-bit" : "8-bit") + " " + (mAudioTrack.getSampleRate() / 1000f) + "kHz, " + desiredFrames + " frames buffer");</span>
+<span class="lineno"> 582</span> 
+<span class="lineno"> 583</span>         return 0;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:581</span>: <span class="message">Call requires API level 3 (current min is 1): android.media.AudioTrack#getChannelCount</span><br /><pre class="errorlines">
+<span class="lineno"> 578</span>             mAudioTrack.play();
+<span class="lineno"> 579</span>         }
+<span class="lineno"> 580</span> 
+<span class="lineno"> 581</span>         Log.v(TAG, "SDL audio: got " + ((mAudioTrack.<span class="errorspan">getChannelCount() >= 2) ? "stereo" : "mono") + " " + ((mAudioTrack.getAudioFormat() == AudioFormat.ENCODING_PCM_16BIT) ? "16-bit" : "8-bit") + " " + (mAudioTrack.getSampleRate() / 1000f) + "kHz, " + desiredFrames + " frames buffer");</span>
+<span class="lineno"> 582</span> 
+<span class="lineno"> 583</span>         return 0;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:581</span>: <span class="message">Call requires API level 3 (current min is 1): android.media.AudioTrack#getSampleRate</span><br /><pre class="errorlines">
+<span class="lineno"> 578</span>             mAudioTrack.play();
+<span class="lineno"> 579</span>         }
+<span class="lineno"> 580</span> 
+<span class="lineno"> 581</span>         Log.v(TAG, "SDL audio: got " + ((mAudioTrack.getChannelCount() >= 2) ? "stereo" : "mono") + " " + ((mAudioTrack.getAudioFormat() == AudioFormat.ENCODING_PCM_16BIT) ? "16-bit" : "8-bit") + " " + (mAudioTrack.<span class="errorspan">getSampleRate() / 1000f) + "kHz, " + desiredFrames + " frames buffer");</span>
+<span class="lineno"> 582</span> 
+<span class="lineno"> 583</span>         return 0;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:591</span>: <span class="message">Call requires API level 3 (current min is 1): android.media.AudioTrack#write</span><br /><pre class="errorlines">
+<span class="lineno"> 588</span>      */
+<span class="lineno"> 589</span>     public static void audioWriteShortBuffer(short[] buffer) {
+<span class="lineno"> 590</span>         for (int i = 0; i &lt; buffer.length; ) {
+<span class="lineno"> 591</span>             int result = mAudioTrack.<span class="errorspan">write(buffer, i, buffer.length - i);</span>
+<span class="lineno"> 592</span>             if (result > 0) {
+<span class="lineno"> 593</span>                 i += result;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:612</span>: <span class="message">Call requires API level 3 (current min is 1): android.media.AudioTrack#write</span><br /><pre class="errorlines">
+<span class="lineno"> 609</span>      */
+<span class="lineno"> 610</span>     public static void audioWriteByteBuffer(byte[] buffer) {
+<span class="lineno"> 611</span>         for (int i = 0; i &lt; buffer.length; ) {
+<span class="lineno"> 612</span>             int result = mAudioTrack.<span class="errorspan">write(buffer, i, buffer.length - i);</span>
+<span class="lineno"> 613</span>             if (result > 0) {
+<span class="lineno"> 614</span>                 i += result;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:641</span>: <span class="message">Call requires API level 3 (current min is 1): android.media.AudioRecord#getMinBufferSize</span><br /><pre class="errorlines">
+<span class="lineno"> 638</span>         // Let the user pick a larger buffer if they really want -- but ye
+<span class="lineno"> 639</span>         // gods they probably shouldn't, the minimums are horrifyingly high
+<span class="lineno"> 640</span>         // latency already
+<span class="lineno"> 641</span>         desiredFrames = Math.max(desiredFrames, (AudioRecord.<span class="errorspan">getMinBufferSize(sampleRate, channelConfig, audioFormat) + frameSize - 1) / frameSize);</span>
+<span class="lineno"> 642</span> 
+<span class="lineno"> 643</span>         if (mAudioRecord == null) {
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:644</span>: <span class="message">Call requires API level 3 (current min is 1): new android.media.AudioRecord</span><br /><pre class="errorlines">
+<span class="lineno"> 641</span>         desiredFrames = Math.max(desiredFrames, (AudioRecord.getMinBufferSize(sampleRate, channelConfig, audioFormat) + frameSize - 1) / frameSize);
+<span class="lineno"> 642</span> 
+<span class="lineno"> 643</span>         if (mAudioRecord == null) {
+<span class="lineno"> 644</span>             mAudioRecord = new <span class="errorspan">AudioRecord(MediaRecorder.AudioSource.DEFAULT, sampleRate,</span>
+<span class="lineno"> 645</span>                     channelConfig, audioFormat, desiredFrames * frameSize);
+<span class="lineno"> 646</span> 
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:648</span>: <span class="message">Call requires API level 3 (current min is 1): android.media.AudioRecord#getState</span><br /><pre class="errorlines">
+<span class="lineno"> 645</span>                     channelConfig, audioFormat, desiredFrames * frameSize);
+<span class="lineno"> 646</span> 
+<span class="lineno"> 647</span>             // see notes about AudioTrack state in audioOpen(), above. Probably also applies here.
+<span class="lineno"> 648</span>             if (mAudioRecord.<span class="errorspan">getState() != AudioRecord.STATE_INITIALIZED) {</span>
+<span class="lineno"> 649</span>                 Log.e(TAG, "Failed during initialization of AudioRecord");
+<span class="lineno"> 650</span>                 mAudioRecord.release();
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:650</span>: <span class="message">Call requires API level 3 (current min is 1): android.media.AudioRecord#release</span><br /><pre class="errorlines">
+<span class="lineno"> 647</span>             // see notes about AudioTrack state in audioOpen(), above. Probably also applies here.
+<span class="lineno"> 648</span>             if (mAudioRecord.getState() != AudioRecord.STATE_INITIALIZED) {
+<span class="lineno"> 649</span>                 Log.e(TAG, "Failed during initialization of AudioRecord");
+<span class="lineno"> 650</span>                 mAudioRecord.<span class="errorspan">release();</span>
+<span class="lineno"> 651</span>                 mAudioRecord = null;
+<span class="lineno"> 652</span>                 return -1;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:655</span>: <span class="message">Call requires API level 3 (current min is 1): android.media.AudioRecord#startRecording</span><br /><pre class="errorlines">
+<span class="lineno"> 652</span>                 return -1;
+<span class="lineno"> 653</span>             }
+<span class="lineno"> 654</span> 
+<span class="lineno"> 655</span>             mAudioRecord.<span class="errorspan">startRecording();</span>
+<span class="lineno"> 656</span>         }
+<span class="lineno"> 657</span> 
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:658</span>: <span class="message">Call requires API level 3 (current min is 1): android.media.AudioRecord#getAudioFormat</span><br /><pre class="errorlines">
+<span class="lineno"> 655</span>             mAudioRecord.startRecording();
+<span class="lineno"> 656</span>         }
+<span class="lineno"> 657</span> 
+<span class="lineno"> 658</span>         Log.v(TAG, "SDL capture: got " + ((mAudioRecord.getChannelCount() >= 2) ? "stereo" : "mono") + " " + ((mAudioRecord.<span class="errorspan">getAudioFormat() == AudioFormat.ENCODING_PCM_16BIT) ? "16-bit" : "8-bit") + " " + (mAudioRecord.getSampleRate() / 1000f) + "kHz, " + desiredFrames + " frames buffer");</span>
+<span class="lineno"> 659</span> 
+<span class="lineno"> 660</span>         return 0;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:658</span>: <span class="message">Call requires API level 3 (current min is 1): android.media.AudioRecord#getChannelCount</span><br /><pre class="errorlines">
+<span class="lineno"> 655</span>             mAudioRecord.startRecording();
+<span class="lineno"> 656</span>         }
+<span class="lineno"> 657</span> 
+<span class="lineno"> 658</span>         Log.v(TAG, "SDL capture: got " + ((mAudioRecord.<span class="errorspan">getChannelCount() >= 2) ? "stereo" : "mono") + " " + ((mAudioRecord.getAudioFormat() == AudioFormat.ENCODING_PCM_16BIT) ? "16-bit" : "8-bit") + " " + (mAudioRecord.getSampleRate() / 1000f) + "kHz, " + desiredFrames + " frames buffer");</span>
+<span class="lineno"> 659</span> 
+<span class="lineno"> 660</span>         return 0;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:658</span>: <span class="message">Call requires API level 3 (current min is 1): android.media.AudioRecord#getSampleRate</span><br /><pre class="errorlines">
+<span class="lineno"> 655</span>             mAudioRecord.startRecording();
+<span class="lineno"> 656</span>         }
+<span class="lineno"> 657</span> 
+<span class="lineno"> 658</span>         Log.v(TAG, "SDL capture: got " + ((mAudioRecord.getChannelCount() >= 2) ? "stereo" : "mono") + " " + ((mAudioRecord.getAudioFormat() == AudioFormat.ENCODING_PCM_16BIT) ? "16-bit" : "8-bit") + " " + (mAudioRecord.<span class="errorspan">getSampleRate() / 1000f) + "kHz, " + desiredFrames + " frames buffer");</span>
+<span class="lineno"> 659</span> 
+<span class="lineno"> 660</span>         return 0;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:667</span>: <span class="message">Call requires API level 3 (current min is 1): android.media.AudioRecord#read</span><br /><pre class="errorlines">
+<span class="lineno"> 664</span>     public static int captureReadShortBuffer(short[] buffer, boolean blocking) {
+<span class="lineno"> 665</span>         // !!! FIXME: this is available in API Level 23. Until then, we always block.  :(
+<span class="lineno"> 666</span>         //return mAudioRecord.read(buffer, 0, buffer.length, blocking ? AudioRecord.READ_BLOCKING : AudioRecord.READ_NON_BLOCKING);
+<span class="lineno"> 667</span>         return mAudioRecord.<span class="errorspan">read(buffer, 0, buffer.length);</span>
+<span class="lineno"> 668</span>     }
+<span class="lineno"> 669</span> 
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:674</span>: <span class="message">Call requires API level 3 (current min is 1): android.media.AudioRecord#read</span><br /><pre class="errorlines">
+<span class="lineno"> 671</span>     public static int captureReadByteBuffer(byte[] buffer, boolean blocking) {
+<span class="lineno"> 672</span>         // !!! FIXME: this is available in API Level 23. Until then, we always block.  :(
+<span class="lineno"> 673</span>         //return mAudioRecord.read(buffer, 0, buffer.length, blocking ? AudioRecord.READ_BLOCKING : AudioRecord.READ_NON_BLOCKING);
+<span class="lineno"> 674</span>         return mAudioRecord.<span class="errorspan">read(buffer, 0, buffer.length);</span>
+<span class="lineno"> 675</span>     }
+<span class="lineno"> 676</span> 
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:681</span>: <span class="message">Call requires API level 3 (current min is 1): android.media.AudioTrack#stop</span><br /><pre class="errorlines">
+<span class="lineno"> 678</span>     /** This method is called by SDL using JNI. */
+<span class="lineno"> 679</span>     public static void audioClose() {
+<span class="lineno"> 680</span>         if (mAudioTrack != null) {
+<span class="lineno"> 681</span>             mAudioTrack.<span class="errorspan">stop();</span>
+<span class="lineno"> 682</span>             mAudioTrack.release();
+<span class="lineno"> 683</span>             mAudioTrack = null;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:682</span>: <span class="message">Call requires API level 3 (current min is 1): android.media.AudioTrack#release</span><br /><pre class="errorlines">
+<span class="lineno"> 679</span>     public static void audioClose() {
+<span class="lineno"> 680</span>         if (mAudioTrack != null) {
+<span class="lineno"> 681</span>             mAudioTrack.stop();
+<span class="lineno"> 682</span>             mAudioTrack.<span class="errorspan">release();</span>
+<span class="lineno"> 683</span>             mAudioTrack = null;
+<span class="lineno"> 684</span>         }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:690</span>: <span class="message">Call requires API level 3 (current min is 1): android.media.AudioRecord#stop</span><br /><pre class="errorlines">
+<span class="lineno"> 687</span>     /** This method is called by SDL using JNI. */
+<span class="lineno"> 688</span>     public static void captureClose() {
+<span class="lineno"> 689</span>         if (mAudioRecord != null) {
+<span class="lineno"> 690</span>             mAudioRecord.<span class="errorspan">stop();</span>
+<span class="lineno"> 691</span>             mAudioRecord.release();
+<span class="lineno"> 692</span>             mAudioRecord = null;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:691</span>: <span class="message">Call requires API level 3 (current min is 1): android.media.AudioRecord#release</span><br /><pre class="errorlines">
+<span class="lineno"> 688</span>     public static void captureClose() {
+<span class="lineno"> 689</span>         if (mAudioRecord != null) {
+<span class="lineno"> 690</span>             mAudioRecord.stop();
+<span class="lineno"> 691</span>             mAudioRecord.<span class="errorspan">release();</span>
+<span class="lineno"> 692</span>             mAudioRecord = null;
+<span class="lineno"> 693</span>         }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:704</span>: <span class="message">Call requires API level 9 (current min is 1): android.view.InputDevice#getDeviceIds</span><br /><pre class="errorlines">
+<span class="lineno"> 701</span>      * @return an array which may be empty but is never null.
+<span class="lineno"> 702</span>      */
+<span class="lineno"> 703</span>     public static int[] inputGetInputDeviceIds(int sources) {
+<span class="lineno"> 704</span>         int[] ids = InputDevice.<span class="errorspan">getDeviceIds();</span>
+<span class="lineno"> 705</span>         int[] filtered = new int[ids.length];
+<span class="lineno"> 706</span>         int used = 0;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:708</span>: <span class="message">Call requires API level 9 (current min is 1): android.view.InputDevice#getDevice</span><br /><pre class="errorlines">
+<span class="lineno"> 705</span>         int[] filtered = new int[ids.length];
+<span class="lineno"> 706</span>         int used = 0;
+<span class="lineno"> 707</span>         for (int i = 0; i &lt; ids.length; ++i) {
+<span class="lineno"> 708</span>             InputDevice device = InputDevice.<span class="errorspan">getDevice(ids[i]);</span>
+<span class="lineno"> 709</span>             if ((device != null) &amp;&amp; ((device.getSources() &amp; sources) != 0)) {
+<span class="lineno"> 710</span>                 filtered[used++] = device.getId();
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:709</span>: <span class="message">Call requires API level 9 (current min is 1): android.view.InputDevice#getSources</span><br /><pre class="errorlines">
+<span class="lineno"> 706</span>         int used = 0;
+<span class="lineno"> 707</span>         for (int i = 0; i &lt; ids.length; ++i) {
+<span class="lineno"> 708</span>             InputDevice device = InputDevice.getDevice(ids[i]);
+<span class="lineno"> 709</span>             if ((device != null) &amp;&amp; ((device.<span class="errorspan">getSources() &amp; sources) != 0)) {</span>
+<span class="lineno"> 710</span>                 filtered[used++] = device.getId();
+<span class="lineno"> 711</span>             }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:710</span>: <span class="message">Call requires API level 9 (current min is 1): android.view.InputDevice#getId</span><br /><pre class="errorlines">
+<span class="lineno"> 707</span>         for (int i = 0; i &lt; ids.length; ++i) {
+<span class="lineno"> 708</span>             InputDevice device = InputDevice.getDevice(ids[i]);
+<span class="lineno"> 709</span>             if ((device != null) &amp;&amp; ((device.getSources() &amp; sources) != 0)) {
+<span class="lineno"> 710</span>                 filtered[used++] = device.<span class="errorspan">getId();</span>
+<span class="lineno"> 711</span>             }
+<span class="lineno"> 712</span>         }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:713</span>: <span class="message">Call requires API level 9 (current min is 1): java.util.Arrays#copyOf</span><br /><pre class="errorlines">
+<span class="lineno"> 710</span>                 filtered[used++] = device.getId();
+<span class="lineno"> 711</span>             }
+<span class="lineno"> 712</span>         }
+<span class="lineno"> 713</span>         return Arrays.<span class="errorspan">copyOf(filtered, used);</span>
+<span class="lineno"> 714</span>     }
+<span class="lineno"> 715</span> 
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:732</span>: <span class="message">Call requires API level 9 (current min is 1): android.view.InputDevice#getDevice</span><br /><pre class="errorlines">
+<span class="lineno"> 729</span> 
+<span class="lineno"> 730</span>     // Check if a given device is considered a possible SDL joystick
+<span class="lineno"> 731</span>     public static boolean isDeviceSDLJoystick(int deviceId) {
+<span class="lineno"> 732</span>         InputDevice device = InputDevice.<span class="errorspan">getDevice(deviceId);</span>
+<span class="lineno"> 733</span>         // We cannot use InputDevice.isVirtual before API 16, so let's accept
+<span class="lineno"> 734</span>         // only nonnegative device ids (VIRTUAL_KEYBOARD equals -1)
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:738</span>: <span class="message">Call requires API level 9 (current min is 1): android.view.InputDevice#getSources</span><br /><pre class="errorlines">
+<span class="lineno"> 735</span>         if ((device == null) || (deviceId &lt; 0)) {
+<span class="lineno"> 736</span>             return false;
+<span class="lineno"> 737</span>         }
+<span class="lineno"> 738</span>         int sources = device.<span class="errorspan">getSources();</span>
+<span class="lineno"> 739</span>         return (((sources &amp; InputDevice.SOURCE_CLASS_JOYSTICK) == InputDevice.SOURCE_CLASS_JOYSTICK) ||
+<span class="lineno"> 740</span>                 ((sources &amp; InputDevice.SOURCE_DPAD) == InputDevice.SOURCE_DPAD) ||
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:777</span>: <span class="message">Call requires API level 9 (current min is 1): new java.io.IOException</span><br /><pre class="errorlines">
+<span class="lineno"> 774</span>                 patchVersion = Integer.valueOf(patchHint);
+<span class="lineno"> 775</span>             } catch (NumberFormatException ex) {
+<span class="lineno"> 776</span>                 ex.printStackTrace();
+<span class="lineno"> 777</span>                 throw new <span class="errorspan">IOException("No valid file versions set for APK expansion files", ex);</span>
+<span class="lineno"> 778</span>             }
+<span class="lineno"> 779</span> 
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:793</span>: <span class="message">Call requires API level 9 (current min is 1): new java.io.IOException</span><br /><pre class="errorlines">
+<span class="lineno"> 790</span>                 ex.printStackTrace();
+<span class="lineno"> 791</span>                 expansionFile = null;
+<span class="lineno"> 792</span>                 expansionFileMethod = null;
+<span class="lineno"> 793</span>                 throw new <span class="errorspan">IOException("Could not access APK expansion support library", ex);</span>
+<span class="lineno"> 794</span>             }
+<span class="lineno"> 795</span>         }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:804</span>: <span class="message">Call requires API level 9 (current min is 1): new java.io.IOException</span><br /><pre class="errorlines">
+<span class="lineno"> 801</span>         } catch (Exception ex) {
+<span class="lineno"> 802</span>             // calling "getInputStream" failed
+<span class="lineno"> 803</span>             ex.printStackTrace();
+<span class="lineno"> 804</span>             throw new <span class="errorspan">IOException("Could not open stream from APK expansion file", ex);</span>
+<span class="lineno"> 805</span>         }
+<span class="lineno"> 806</span> 
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:866</span>: <span class="message">Call requires API level 8 (current min is 1): android.app.Activity#showDialog</span><br /><pre class="errorlines">
+<span class="lineno"> 863</span>         runOnUiThread(new Runnable() {
+<span class="lineno"> 864</span>             @Override
+<span class="lineno"> 865</span>             public void run() {
+<span class="lineno"> 866</span>                 <span class="errorspan">showDialog(dialogs++, args);</span>
+<span class="lineno"> 867</span>             }
+<span class="lineno"> 868</span>         });
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1042</span>: <span class="message">Class requires API level 3 (current min is 1): android.hardware.SensorEventListener</span><br /><pre class="errorlines">
+<span class="lineno">1039</span>     Because of this, that's where we set up the SDL thread
+<span class="lineno">1040</span> */
+<span class="lineno">1041</span> class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
+<span class="lineno">1042</span>     View.OnKeyListener, View.OnTouchListener, <span class="errorspan">SensorEventListener  {</span>
+<span class="lineno">1043</span> 
+<span class="lineno">1044</span>     // Sensors
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1065</span>: <span class="message">Field requires API level 4 (current min is 1): android.os.Build.VERSION#SDK_INT</span><br /><pre class="errorlines">
+<span class="lineno">1062</span>         mDisplay = ((WindowManager)context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+<span class="lineno">1063</span>         mSensorManager = (SensorManager)context.getSystemService(Context.SENSOR_SERVICE);
+<span class="lineno">1064</span> 
+<span class="lineno">1065</span>         if(Build.VERSION.<span class="errorspan">SDK_INT >= 12) {</span>
+<span class="lineno">1066</span>             setOnGenericMotionListener(new SDLGenericMotionListener_API12());
+<span class="lineno">1067</span>         }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1066</span>: <span class="message">Call requires API level 12 (current min is 1): android.view.SurfaceView#setOnGenericMotionListener</span><br /><pre class="errorlines">
+<span class="lineno">1063</span>         mSensorManager = (SensorManager)context.getSystemService(Context.SENSOR_SERVICE);
+<span class="lineno">1064</span> 
+<span class="lineno">1065</span>         if(Build.VERSION.SDK_INT >= 12) {
+<span class="lineno">1066</span>             <span class="errorspan">setOnGenericMotionListener(new SDLGenericMotionListener_API12());</span>
+<span class="lineno">1067</span>         }
+<span class="lineno">1068</span> 
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1260</span>: <span class="message">Call requires API level 9 (current min is 1): android.view.KeyEvent#getSource</span><br /><pre class="errorlines">
+<span class="lineno">1257</span>             }
+<span class="lineno">1258</span>         }
+<span class="lineno">1259</span> 
+<span class="lineno">1260</span>         if ((event.<span class="errorspan">getSource() &amp; InputDevice.SOURCE_KEYBOARD) != 0) {</span>
+<span class="lineno">1261</span>             if (event.getAction() == KeyEvent.ACTION_DOWN) {
+<span class="lineno">1262</span>                 //Log.v("SDL", "key down: " + keyCode);
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1273</span>: <span class="message">Call requires API level 9 (current min is 1): android.view.KeyEvent#getSource</span><br /><pre class="errorlines">
+<span class="lineno">1270</span>             }
+<span class="lineno">1271</span>         }
+<span class="lineno">1272</span> 
+<span class="lineno">1273</span>         if ((event.<span class="errorspan">getSource() &amp; InputDevice.SOURCE_MOUSE) != 0) {</span>
+<span class="lineno">1274</span>             // on some devices key events are sent for mouse BUTTON_BACK/FORWARD presses
+<span class="lineno">1275</span>             // they are ignored here because sending them as mouse input to SDL is messy
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1295</span>: <span class="message">Call requires API level 5 (current min is 1): android.view.MotionEvent#getPointerCount</span><br /><pre class="errorlines">
+<span class="lineno">1292</span>     public boolean onTouch(View v, MotionEvent event) {
+<span class="lineno">1293</span>         /* Ref: http://developer.android.com/training/gestures/multi.html */
+<span class="lineno">1294</span>         final int touchDevId = event.getDeviceId();
+<span class="lineno">1295</span>         final int pointerCount = event.<span class="errorspan">getPointerCount();</span>
+<span class="lineno">1296</span>         int action = event.getActionMasked();
+<span class="lineno">1297</span>         int pointerFingerId;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1296</span>: <span class="message">Call requires API level 8 (current min is 1): android.view.MotionEvent#getActionMasked</span><br /><pre class="errorlines">
+<span class="lineno">1293</span>         /* Ref: http://developer.android.com/training/gestures/multi.html */
+<span class="lineno">1294</span>         final int touchDevId = event.getDeviceId();
+<span class="lineno">1295</span>         final int pointerCount = event.getPointerCount();
+<span class="lineno">1296</span>         int action = event.<span class="errorspan">getActionMasked();</span>
+<span class="lineno">1297</span>         int pointerFingerId;
+<span class="lineno">1298</span>         int mouseButton;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1303</span>: <span class="message">Call requires API level 9 (current min is 1): android.view.MotionEvent#getSource</span><br /><pre class="errorlines">
+<span class="lineno">1300</span>         float x,y,p;
+<span class="lineno">1301</span> 
+<span class="lineno">1302</span>         // !!! FIXME: dump this SDK check after 2.0.4 ships and require API14.
+<span class="lineno">1303</span>         if (event.<span class="errorspan">getSource() == InputDevice.SOURCE_MOUSE &amp;&amp; SDLActivity.mSeparateMouseAndTouch) {</span>
+<span class="lineno">1304</span>             if (Build.VERSION.SDK_INT &lt; 14) {
+<span class="lineno">1305</span>                 mouseButton = 1; // all mouse buttons are the left button
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1304</span>: <span class="message">Field requires API level 4 (current min is 1): android.os.Build.VERSION#SDK_INT</span><br /><pre class="errorlines">
+<span class="lineno">1301</span> 
+<span class="lineno">1302</span>         // !!! FIXME: dump this SDK check after 2.0.4 ships and require API14.
+<span class="lineno">1303</span>         if (event.getSource() == InputDevice.SOURCE_MOUSE &amp;&amp; SDLActivity.mSeparateMouseAndTouch) {
+<span class="lineno">1304</span>             if (Build.VERSION.<span class="errorspan">SDK_INT &lt; 14) {</span>
+<span class="lineno">1305</span>                 mouseButton = 1; // all mouse buttons are the left button
+<span class="lineno">1306</span>             } else {
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1313</span>: <span class="message">Call requires API level 5 (current min is 1): android.view.MotionEvent#getX</span><br /><pre class="errorlines">
+<span class="lineno">1310</span>                     mouseButton = 1;    // oh well.
+<span class="lineno">1311</span>                 }
+<span class="lineno">1312</span>             }
+<span class="lineno">1313</span>             SDLActivity.onNativeMouse(mouseButton, action, event.<span class="errorspan">getX(0), event.getY(0));</span>
+<span class="lineno">1314</span>         } else {
+<span class="lineno">1315</span>             switch(action) {
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1313</span>: <span class="message">Call requires API level 5 (current min is 1): android.view.MotionEvent#getY</span><br /><pre class="errorlines">
+<span class="lineno">1310</span>                     mouseButton = 1;    // oh well.
+<span class="lineno">1311</span>                 }
+<span class="lineno">1312</span>             }
+<span class="lineno">1313</span>             SDLActivity.onNativeMouse(mouseButton, action, event.getX(0), event.<span class="errorspan">getY(0));</span>
+<span class="lineno">1314</span>         } else {
+<span class="lineno">1315</span>             switch(action) {
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1318</span>: <span class="message">Call requires API level 5 (current min is 1): android.view.MotionEvent#getPointerId</span><br /><pre class="errorlines">
+<span class="lineno">1315</span>             switch(action) {
+<span class="lineno">1316</span>                 case MotionEvent.ACTION_MOVE:
+<span class="lineno">1317</span>                     for (i = 0; i &lt; pointerCount; i++) {
+<span class="lineno">1318</span>                         pointerFingerId = event.<span class="errorspan">getPointerId(i);</span>
+<span class="lineno">1319</span>                         x = event.getX(i) / mWidth;
+<span class="lineno">1320</span>                         y = event.getY(i) / mHeight;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1319</span>: <span class="message">Call requires API level 5 (current min is 1): android.view.MotionEvent#getX</span><br /><pre class="errorlines">
+<span class="lineno">1316</span>                 case MotionEvent.ACTION_MOVE:
+<span class="lineno">1317</span>                     for (i = 0; i &lt; pointerCount; i++) {
+<span class="lineno">1318</span>                         pointerFingerId = event.getPointerId(i);
+<span class="lineno">1319</span>                         x = event.<span class="errorspan">getX(i) / mWidth;</span>
+<span class="lineno">1320</span>                         y = event.getY(i) / mHeight;
+<span class="lineno">1321</span>                         p = event.getPressure(i);
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1320</span>: <span class="message">Call requires API level 5 (current min is 1): android.view.MotionEvent#getY</span><br /><pre class="errorlines">
+<span class="lineno">1317</span>                     for (i = 0; i &lt; pointerCount; i++) {
+<span class="lineno">1318</span>                         pointerFingerId = event.getPointerId(i);
+<span class="lineno">1319</span>                         x = event.getX(i) / mWidth;
+<span class="lineno">1320</span>                         y = event.<span class="errorspan">getY(i) / mHeight;</span>
+<span class="lineno">1321</span>                         p = event.getPressure(i);
+<span class="lineno">1322</span>                         if (p > 1.0f) {
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1321</span>: <span class="message">Call requires API level 5 (current min is 1): android.view.MotionEvent#getPressure</span><br /><pre class="errorlines">
+<span class="lineno">1318</span>                         pointerFingerId = event.getPointerId(i);
+<span class="lineno">1319</span>                         x = event.getX(i) / mWidth;
+<span class="lineno">1320</span>                         y = event.getY(i) / mHeight;
+<span class="lineno">1321</span>                         p = event.<span class="errorspan">getPressure(i);</span>
+<span class="lineno">1322</span>                         if (p > 1.0f) {
+<span class="lineno">1323</span>                             // may be larger than 1.0f on some devices
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1339</span>: <span class="message">Call requires API level 8 (current min is 1): android.view.MotionEvent#getActionIndex</span><br /><pre class="errorlines">
+<span class="lineno">1336</span>                 case MotionEvent.ACTION_POINTER_DOWN:
+<span class="lineno">1337</span>                     // Non primary pointer up/down
+<span class="lineno">1338</span>                     if (i == -1) {
+<span class="lineno">1339</span>                         i = event.<span class="errorspan">getActionIndex();</span>
+<span class="lineno">1340</span>                     }
+<span class="lineno">1341</span> 
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1342</span>: <span class="message">Call requires API level 5 (current min is 1): android.view.MotionEvent#getPointerId</span><br /><pre class="errorlines">
+<span class="lineno">1339</span>                         i = event.getActionIndex();
+<span class="lineno">1340</span>                     }
+<span class="lineno">1341</span> 
+<span class="lineno">1342</span>                     pointerFingerId = event.<span class="errorspan">getPointerId(i);</span>
+<span class="lineno">1343</span>                     x = event.getX(i) / mWidth;
+<span class="lineno">1344</span>                     y = event.getY(i) / mHeight;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1343</span>: <span class="message">Call requires API level 5 (current min is 1): android.view.MotionEvent#getX</span><br /><pre class="errorlines">
+<span class="lineno">1340</span>                     }
+<span class="lineno">1341</span> 
+<span class="lineno">1342</span>                     pointerFingerId = event.getPointerId(i);
+<span class="lineno">1343</span>                     x = event.<span class="errorspan">getX(i) / mWidth;</span>
+<span class="lineno">1344</span>                     y = event.getY(i) / mHeight;
+<span class="lineno">1345</span>                     p = event.getPressure(i);
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1344</span>: <span class="message">Call requires API level 5 (current min is 1): android.view.MotionEvent#getY</span><br /><pre class="errorlines">
+<span class="lineno">1341</span> 
+<span class="lineno">1342</span>                     pointerFingerId = event.getPointerId(i);
+<span class="lineno">1343</span>                     x = event.getX(i) / mWidth;
+<span class="lineno">1344</span>                     y = event.<span class="errorspan">getY(i) / mHeight;</span>
+<span class="lineno">1345</span>                     p = event.getPressure(i);
+<span class="lineno">1346</span>                     if (p > 1.0f) {
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1345</span>: <span class="message">Call requires API level 5 (current min is 1): android.view.MotionEvent#getPressure</span><br /><pre class="errorlines">
+<span class="lineno">1342</span>                     pointerFingerId = event.getPointerId(i);
+<span class="lineno">1343</span>                     x = event.getX(i) / mWidth;
+<span class="lineno">1344</span>                     y = event.getY(i) / mHeight;
+<span class="lineno">1345</span>                     p = event.<span class="errorspan">getPressure(i);</span>
+<span class="lineno">1346</span>                     if (p > 1.0f) {
+<span class="lineno">1347</span>                         // may be larger than 1.0f on some devices
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1356</span>: <span class="message">Call requires API level 5 (current min is 1): android.view.MotionEvent#getPointerId</span><br /><pre class="errorlines">
+<span class="lineno">1353</span> 
+<span class="lineno">1354</span>                 case MotionEvent.ACTION_CANCEL:
+<span class="lineno">1355</span>                     for (i = 0; i &lt; pointerCount; i++) {
+<span class="lineno">1356</span>                         pointerFingerId = event.<span class="errorspan">getPointerId(i);</span>
+<span class="lineno">1357</span>                         x = event.getX(i) / mWidth;
+<span class="lineno">1358</span>                         y = event.getY(i) / mHeight;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1357</span>: <span class="message">Call requires API level 5 (current min is 1): android.view.MotionEvent#getX</span><br /><pre class="errorlines">
+<span class="lineno">1354</span>                 case MotionEvent.ACTION_CANCEL:
+<span class="lineno">1355</span>                     for (i = 0; i &lt; pointerCount; i++) {
+<span class="lineno">1356</span>                         pointerFingerId = event.getPointerId(i);
+<span class="lineno">1357</span>                         x = event.<span class="errorspan">getX(i) / mWidth;</span>
+<span class="lineno">1358</span>                         y = event.getY(i) / mHeight;
+<span class="lineno">1359</span>                         p = event.getPressure(i);
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1358</span>: <span class="message">Call requires API level 5 (current min is 1): android.view.MotionEvent#getY</span><br /><pre class="errorlines">
+<span class="lineno">1355</span>                     for (i = 0; i &lt; pointerCount; i++) {
+<span class="lineno">1356</span>                         pointerFingerId = event.getPointerId(i);
+<span class="lineno">1357</span>                         x = event.getX(i) / mWidth;
+<span class="lineno">1358</span>                         y = event.<span class="errorspan">getY(i) / mHeight;</span>
+<span class="lineno">1359</span>                         p = event.getPressure(i);
+<span class="lineno">1360</span>                         if (p > 1.0f) {
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1359</span>: <span class="message">Call requires API level 5 (current min is 1): android.view.MotionEvent#getPressure</span><br /><pre class="errorlines">
+<span class="lineno">1356</span>                         pointerFingerId = event.getPointerId(i);
+<span class="lineno">1357</span>                         x = event.getX(i) / mWidth;
+<span class="lineno">1358</span>                         y = event.getY(i) / mHeight;
+<span class="lineno">1359</span>                         p = event.<span class="errorspan">getPressure(i);</span>
+<span class="lineno">1360</span>                         if (p > 1.0f) {
+<span class="lineno">1361</span>                             // may be larger than 1.0f on some devices
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1381</span>: <span class="message">Call requires API level 3 (current min is 1): android.hardware.SensorManager#registerListener</span><br /><pre class="errorlines">
+<span class="lineno">1378</span>     public void enableSensor(int sensortype, boolean enabled) {
+<span class="lineno">1379</span>         // TODO: This uses getDefaultSensor - what if we have >1 accels?
+<span class="lineno">1380</span>         if (enabled) {
+<span class="lineno">1381</span>             mSensorManager.<span class="errorspan">registerListener(this,</span>
+<span class="lineno">1382</span>                             mSensorManager.getDefaultSensor(sensortype),
+<span class="lineno">1383</span>                             SensorManager.SENSOR_DELAY_GAME, null);
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1382</span>: <span class="message">Call requires API level 3 (current min is 1): android.hardware.SensorManager#getDefaultSensor</span><br /><pre class="errorlines">
+<span class="lineno">1379</span>         // TODO: This uses getDefaultSensor - what if we have >1 accels?
+<span class="lineno">1380</span>         if (enabled) {
+<span class="lineno">1381</span>             mSensorManager.registerListener(this,
+<span class="lineno">1382</span>                             mSensorManager.<span class="errorspan">getDefaultSensor(sensortype),</span>
+<span class="lineno">1383</span>                             SensorManager.SENSOR_DELAY_GAME, null);
+<span class="lineno">1384</span>         } else {
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1385</span>: <span class="message">Call requires API level 3 (current min is 1): android.hardware.SensorManager#unregisterListener</span><br /><pre class="errorlines">
+<span class="lineno">1382</span>                             mSensorManager.getDefaultSensor(sensortype),
+<span class="lineno">1383</span>                             SensorManager.SENSOR_DELAY_GAME, null);
+<span class="lineno">1384</span>         } else {
+<span class="lineno">1385</span>             mSensorManager.<span class="errorspan">unregisterListener(this,</span>
+<span class="lineno">1386</span>                             mSensorManager.getDefaultSensor(sensortype));
+<span class="lineno">1387</span>         }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1386</span>: <span class="message">Call requires API level 3 (current min is 1): android.hardware.SensorManager#getDefaultSensor</span><br /><pre class="errorlines">
+<span class="lineno">1383</span>                             SensorManager.SENSOR_DELAY_GAME, null);
+<span class="lineno">1384</span>         } else {
+<span class="lineno">1385</span>             mSensorManager.unregisterListener(this,
+<span class="lineno">1386</span>                             mSensorManager.<span class="errorspan">getDefaultSensor(sensortype));</span>
+<span class="lineno">1387</span>         }
+<span class="lineno">1388</span>     }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1397</span>: <span class="message">Call requires API level 3 (current min is 1): android.hardware.Sensor#getType</span><br /><pre class="errorlines">
+<span class="lineno">1394</span> 
+<span class="lineno">1395</span>     @Override
+<span class="lineno">1396</span>     public void onSensorChanged(SensorEvent event) {
+<span class="lineno">1397</span>         if (event.sensor.<span class="errorspan">getType() == Sensor.TYPE_ACCELEROMETER) {</span>
+<span class="lineno">1398</span>             float x, y;
+<span class="lineno">1399</span>             switch (mDisplay.getRotation()) {
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1397</span>: <span class="message">Field requires API level 3 (current min is 1): android.hardware.SensorEvent#sensor</span><br /><pre class="errorlines">
+<span class="lineno">1394</span> 
+<span class="lineno">1395</span>     @Override
+<span class="lineno">1396</span>     public void onSensorChanged(SensorEvent event) {
+<span class="lineno">1397</span>         if (event.<span class="errorspan">sensor.getType() == Sensor.TYPE_ACCELEROMETER) {</span>
+<span class="lineno">1398</span>             float x, y;
+<span class="lineno">1399</span>             switch (mDisplay.getRotation()) {
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1399</span>: <span class="message">Call requires API level 8 (current min is 1): android.view.Display#getRotation</span><br /><pre class="errorlines">
+<span class="lineno">1396</span>     public void onSensorChanged(SensorEvent event) {
+<span class="lineno">1397</span>         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+<span class="lineno">1398</span>             float x, y;
+<span class="lineno">1399</span>             switch (mDisplay.<span class="errorspan">getRotation()) {</span>
+<span class="lineno">1400</span>                 case Surface.ROTATION_90:
+<span class="lineno">1401</span>                     x = -event.values[1];
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1401</span>: <span class="message">Field requires API level 3 (current min is 1): android.hardware.SensorEvent#values</span><br /><pre class="errorlines">
+<span class="lineno">1398</span>             float x, y;
+<span class="lineno">1399</span>             switch (mDisplay.getRotation()) {
+<span class="lineno">1400</span>                 case Surface.ROTATION_90:
+<span class="lineno">1401</span>                     x = -event.<span class="errorspan">values[1];</span>
+<span class="lineno">1402</span>                     y = event.values[0];
+<span class="lineno">1403</span>                     break;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1402</span>: <span class="message">Field requires API level 3 (current min is 1): android.hardware.SensorEvent#values</span><br /><pre class="errorlines">
+<span class="lineno">1399</span>             switch (mDisplay.getRotation()) {
+<span class="lineno">1400</span>                 case Surface.ROTATION_90:
+<span class="lineno">1401</span>                     x = -event.values[1];
+<span class="lineno">1402</span>                     y = event.<span class="errorspan">values[0];</span>
+<span class="lineno">1403</span>                     break;
+<span class="lineno">1404</span>                 case Surface.ROTATION_270:
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1405</span>: <span class="message">Field requires API level 3 (current min is 1): android.hardware.SensorEvent#values</span><br /><pre class="errorlines">
+<span class="lineno">1402</span>                     y = event.values[0];
+<span class="lineno">1403</span>                     break;
+<span class="lineno">1404</span>                 case Surface.ROTATION_270:
+<span class="lineno">1405</span>                     x = event.<span class="errorspan">values[1];</span>
+<span class="lineno">1406</span>                     y = -event.values[0];
+<span class="lineno">1407</span>                     break;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1406</span>: <span class="message">Field requires API level 3 (current min is 1): android.hardware.SensorEvent#values</span><br /><pre class="errorlines">
+<span class="lineno">1403</span>                     break;
+<span class="lineno">1404</span>                 case Surface.ROTATION_270:
+<span class="lineno">1405</span>                     x = event.values[1];
+<span class="lineno">1406</span>                     y = -event.<span class="errorspan">values[0];</span>
+<span class="lineno">1407</span>                     break;
+<span class="lineno">1408</span>                 case Surface.ROTATION_180:
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1409</span>: <span class="message">Field requires API level 3 (current min is 1): android.hardware.SensorEvent#values</span><br /><pre class="errorlines">
+<span class="lineno">1406</span>                     y = -event.values[0];
+<span class="lineno">1407</span>                     break;
+<span class="lineno">1408</span>                 case Surface.ROTATION_180:
+<span class="lineno">1409</span>                     x = -event.<span class="errorspan">values[1];</span>
+<span class="lineno">1410</span>                     y = -event.values[0];
+<span class="lineno">1411</span>                     break;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1410</span>: <span class="message">Field requires API level 3 (current min is 1): android.hardware.SensorEvent#values</span><br /><pre class="errorlines">
+<span class="lineno">1407</span>                     break;
+<span class="lineno">1408</span>                 case Surface.ROTATION_180:
+<span class="lineno">1409</span>                     x = -event.values[1];
+<span class="lineno">1410</span>                     y = -event.<span class="errorspan">values[0];</span>
+<span class="lineno">1411</span>                     break;
+<span class="lineno">1412</span>                 default:
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1413</span>: <span class="message">Field requires API level 3 (current min is 1): android.hardware.SensorEvent#values</span><br /><pre class="errorlines">
+<span class="lineno">1410</span>                     y = -event.values[0];
+<span class="lineno">1411</span>                     break;
+<span class="lineno">1412</span>                 default:
+<span class="lineno">1413</span>                     x = event.<span class="errorspan">values[0];</span>
+<span class="lineno">1414</span>                     y = event.values[1];
+<span class="lineno">1415</span>                     break;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1414</span>: <span class="message">Field requires API level 3 (current min is 1): android.hardware.SensorEvent#values</span><br /><pre class="errorlines">
+<span class="lineno">1411</span>                     break;
+<span class="lineno">1412</span>                 default:
+<span class="lineno">1413</span>                     x = event.values[0];
+<span class="lineno">1414</span>                     y = event.<span class="errorspan">values[1];</span>
+<span class="lineno">1415</span>                     break;
+<span class="lineno">1416</span>             }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1419</span>: <span class="message">Field requires API level 3 (current min is 1): android.hardware.SensorEvent#values</span><br /><pre class="errorlines">
+<span class="lineno">1416</span>             }
+<span class="lineno">1417</span>             SDLActivity.onNativeAccel(-x / SensorManager.GRAVITY_EARTH,
+<span class="lineno">1418</span>                                       y / SensorManager.GRAVITY_EARTH,
+<span class="lineno">1419</span>                                       event.<span class="errorspan">values[2] / SensorManager.GRAVITY_EARTH);</span>
+<span class="lineno">1420</span>         }
+<span class="lineno">1421</span>     }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1448</span>: <span class="message">Call requires API level 3 (current min is 1): android.view.inputmethod.InputConnection#commitText</span><br /><pre class="errorlines">
+<span class="lineno">1445</span>         // This handles the hardware keyboard input
+<span class="lineno">1446</span>         if (event.isPrintingKey() || keyCode == KeyEvent.KEYCODE_SPACE) {
+<span class="lineno">1447</span>             if (event.getAction() == KeyEvent.ACTION_DOWN) {
+<span class="lineno">1448</span>                 ic.<span class="errorspan">commitText(String.valueOf((char) event.getUnicodeChar()), 1);</span>
+<span class="lineno">1449</span>             }
+<span class="lineno">1450</span>             return true;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1478</span>: <span class="message">Call requires API level 3 (current min is 1): android.view.View#onKeyPreIme</span><br /><pre class="errorlines">
+<span class="lineno">1475</span>                 SDLActivity.onNativeKeyboardFocusLost();
+<span class="lineno">1476</span>             }
+<span class="lineno">1477</span>         }
+<span class="lineno">1478</span>         return super.<span class="errorspan">onKeyPreIme(keyCode, event);</span>
+<span class="lineno">1479</span>     }
+<span class="lineno">1480</span> 
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1485</span>: <span class="message">Field requires API level 3 (current min is 1): android.view.inputmethod.EditorInfo#inputType</span><br /><pre class="errorlines">
+<span class="lineno">1482</span>     public InputConnection onCreateInputConnection(EditorInfo outAttrs) {
+<span class="lineno">1483</span>         ic = new SDLInputConnection(this, true);
+<span class="lineno">1484</span> 
+<span class="lineno">1485</span>         outAttrs.<span class="errorspan">inputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;</span>
+<span class="lineno">1486</span>         outAttrs.imeOptions = EditorInfo.IME_FLAG_NO_EXTRACT_UI
+<span class="lineno">1487</span>                 | 33554432 /* API 11: EditorInfo.IME_FLAG_NO_FULLSCREEN */;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1486</span>: <span class="message">Field requires API level 3 (current min is 1): android.view.inputmethod.EditorInfo#imeOptions</span><br /><pre class="errorlines">
+<span class="lineno">1483</span>         ic = new SDLInputConnection(this, true);
+<span class="lineno">1484</span> 
+<span class="lineno">1485</span>         outAttrs.inputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;
+<span class="lineno">1486</span>         outAttrs.<span class="errorspan">imeOptions = EditorInfo.IME_FLAG_NO_EXTRACT_UI</span>
+<span class="lineno">1487</span>                 | 33554432 /* API 11: EditorInfo.IME_FLAG_NO_FULLSCREEN */;
+<span class="lineno">1488</span> 
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1493</span>: <span class="message">Class requires API level 3 (current min is 1): android.view.inputmethod.BaseInputConnection</span><br /><pre class="errorlines">
+<span class="lineno">1490</span>     }
+<span class="lineno">1491</span> }
+<span class="lineno">1492</span> 
+<span class="lineno">1493</span> class SDLInputConnection extends <span class="errorspan">BaseInputConnection {</span>
+<span class="lineno">1494</span> 
+<span class="lineno">1495</span>     public SDLInputConnection(View targetView, boolean fullEditor) {
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1496</span>: <span class="message">Call requires API level 3 (current min is 1): new android.view.inputmethod.BaseInputConnection</span><br /><pre class="errorlines">
+<span class="lineno">1493</span> class SDLInputConnection extends BaseInputConnection {
+<span class="lineno">1494</span> 
+<span class="lineno">1495</span>     public SDLInputConnection(View targetView, boolean fullEditor) {
+<span class="lineno">1496</span>         <span class="errorspan">super(targetView, fullEditor);</span>
+<span class="lineno">1497</span> 
+<span class="lineno">1498</span>     }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1519</span>: <span class="message">Call requires API level 3 (current min is 1): android.view.inputmethod.BaseInputConnection#sendKeyEvent</span><br /><pre class="errorlines">
+<span class="lineno">1516</span>             SDLActivity.onNativeKeyUp(keyCode);
+<span class="lineno">1517</span>             return true;
+<span class="lineno">1518</span>         }
+<span class="lineno">1519</span>         return super.<span class="errorspan">sendKeyEvent(event);</span>
+<span class="lineno">1520</span>     }
+<span class="lineno">1521</span> 
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1527</span>: <span class="message">Call requires API level 3 (current min is 1): android.view.inputmethod.BaseInputConnection#commitText</span><br /><pre class="errorlines">
+<span class="lineno">1524</span> 
+<span class="lineno">1525</span>         nativeCommitText(text.toString(), newCursorPosition);
+<span class="lineno">1526</span> 
+<span class="lineno">1527</span>         return super.<span class="errorspan">commitText(text, newCursorPosition);</span>
+<span class="lineno">1528</span>     }
+<span class="lineno">1529</span> 
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1535</span>: <span class="message">Call requires API level 3 (current min is 1): android.view.inputmethod.BaseInputConnection#setComposingText</span><br /><pre class="errorlines">
+<span class="lineno">1532</span> 
+<span class="lineno">1533</span>         nativeSetComposingText(text.toString(), newCursorPosition);
+<span class="lineno">1534</span> 
+<span class="lineno">1535</span>         return super.<span class="errorspan">setComposingText(text, newCursorPosition);</span>
+<span class="lineno">1536</span>     }
+<span class="lineno">1537</span> 
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1547</span>: <span class="message">Call requires API level 3 (current min is 1): android.view.inputmethod.BaseInputConnection#sendKeyEvent</span><br /><pre class="errorlines">
+<span class="lineno">1544</span>         // Workaround to capture backspace key. Ref: http://stackoverflow.com/questions/14560344/android-backspace-in-webview-baseinputconnection
+<span class="lineno">1545</span>         if (beforeLength == 1 &amp;&amp; afterLength == 0) {
+<span class="lineno">1546</span>             // backspace
+<span class="lineno">1547</span>             return super.<span class="errorspan">sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DEL))</span>
+<span class="lineno">1548</span>                 &amp;&amp; super.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_DEL));
+<span class="lineno">1549</span>         }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1548</span>: <span class="message">Call requires API level 3 (current min is 1): android.view.inputmethod.BaseInputConnection#sendKeyEvent</span><br /><pre class="errorlines">
+<span class="lineno">1545</span>         if (beforeLength == 1 &amp;&amp; afterLength == 0) {
+<span class="lineno">1546</span>             // backspace
+<span class="lineno">1547</span>             return super.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DEL))
+<span class="lineno">1548</span>                 &amp;&amp; super.<span class="errorspan">sendKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_DEL));</span>
+<span class="lineno">1549</span>         }
+<span class="lineno">1550</span> 
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1551</span>: <span class="message">Call requires API level 3 (current min is 1): android.view.inputmethod.BaseInputConnection#deleteSurroundingText</span><br /><pre class="errorlines">
+<span class="lineno">1548</span>                 &amp;&amp; super.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_DEL));
+<span class="lineno">1549</span>         }
+<span class="lineno">1550</span> 
+<span class="lineno">1551</span>         return super.<span class="errorspan">deleteSurroundingText(beforeLength, afterLength);</span>
+<span class="lineno">1552</span>     }
+<span class="lineno">1553</span> }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1586</span>: <span class="message">Call requires API level 12 (current min is 1): android.view.InputDevice.MotionRange#getAxis</span><br /><pre class="errorlines">
+<span class="lineno">1583</span>     static class RangeComparator implements Comparator&lt;InputDevice.MotionRange> {
+<span class="lineno">1584</span>         @Override
+<span class="lineno">1585</span>         public int compare(InputDevice.MotionRange arg0, InputDevice.MotionRange arg1) {
+<span class="lineno">1586</span>             return arg0.<span class="errorspan">getAxis() - arg1.getAxis();</span>
+<span class="lineno">1587</span>         }
+<span class="lineno">1588</span>     }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1599</span>: <span class="message">Call requires API level 9 (current min is 1): android.view.InputDevice#getDeviceIds</span><br /><pre class="errorlines">
+<span class="lineno">1596</span> 
+<span class="lineno">1597</span>     @Override
+<span class="lineno">1598</span>     public void pollInputDevices() {
+<span class="lineno">1599</span>         int[] deviceIds = InputDevice.<span class="errorspan">getDeviceIds();</span>
+<span class="lineno">1600</span>         // It helps processing the device ids in reverse order
+<span class="lineno">1601</span>         // For example, in the case of the XBox 360 wireless dongle,
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1609</span>: <span class="message">Call requires API level 9 (current min is 1): android.view.InputDevice#getDevice</span><br /><pre class="errorlines">
+<span class="lineno">1606</span>             SDLJoystick joystick = getJoystick(deviceIds[i]);
+<span class="lineno">1607</span>             if (joystick == null) {
+<span class="lineno">1608</span>                 joystick = new SDLJoystick();
+<span class="lineno">1609</span>                 InputDevice joystickDevice = InputDevice.<span class="errorspan">getDevice(deviceIds[i]);</span>
+<span class="lineno">1610</span>                 if (SDLActivity.isDeviceSDLJoystick(deviceIds[i])) {
+<span class="lineno">1611</span>                     joystick.device_id = deviceIds[i];
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1612</span>: <span class="message">Call requires API level 9 (current min is 1): android.view.InputDevice#getName</span><br /><pre class="errorlines">
+<span class="lineno">1609</span>                 InputDevice joystickDevice = InputDevice.getDevice(deviceIds[i]);
+<span class="lineno">1610</span>                 if (SDLActivity.isDeviceSDLJoystick(deviceIds[i])) {
+<span class="lineno">1611</span>                     joystick.device_id = deviceIds[i];
+<span class="lineno">1612</span>                     joystick.name = joystickDevice.<span class="errorspan">getName();</span>
+<span class="lineno">1613</span>                     joystick.axes = new ArrayList&lt;InputDevice.MotionRange>();
+<span class="lineno">1614</span>                     joystick.hats = new ArrayList&lt;InputDevice.MotionRange>();
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1616</span>: <span class="message">Call requires API level 12 (current min is 1): android.view.InputDevice#getMotionRanges</span><br /><pre class="errorlines">
+<span class="lineno">1613</span>                     joystick.axes = new ArrayList&lt;InputDevice.MotionRange>();
+<span class="lineno">1614</span>                     joystick.hats = new ArrayList&lt;InputDevice.MotionRange>();
+<span class="lineno">1615</span> 
+<span class="lineno">1616</span>                     List&lt;InputDevice.MotionRange> ranges = joystickDevice.<span class="errorspan">getMotionRanges();</span>
+<span class="lineno">1617</span>                     Collections.sort(ranges, new RangeComparator());
+<span class="lineno">1618</span>                     for (InputDevice.MotionRange range : ranges ) {
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1619</span>: <span class="message">Call requires API level 12 (current min is 1): android.view.InputDevice.MotionRange#getSource</span><br /><pre class="errorlines">
+<span class="lineno">1616</span>                     List&lt;InputDevice.MotionRange> ranges = joystickDevice.getMotionRanges();
+<span class="lineno">1617</span>                     Collections.sort(ranges, new RangeComparator());
+<span class="lineno">1618</span>                     for (InputDevice.MotionRange range : ranges ) {
+<span class="lineno">1619</span>                         if ((range.<span class="errorspan">getSource() &amp; InputDevice.SOURCE_CLASS_JOYSTICK) != 0) {</span>
+<span class="lineno">1620</span>                             if (range.getAxis() == MotionEvent.AXIS_HAT_X ||
+<span class="lineno">1621</span>                                 range.getAxis() == MotionEvent.AXIS_HAT_Y) {
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1620</span>: <span class="message">Call requires API level 12 (current min is 1): android.view.InputDevice.MotionRange#getAxis</span><br /><pre class="errorlines">
+<span class="lineno">1617</span>                     Collections.sort(ranges, new RangeComparator());
+<span class="lineno">1618</span>                     for (InputDevice.MotionRange range : ranges ) {
+<span class="lineno">1619</span>                         if ((range.getSource() &amp; InputDevice.SOURCE_CLASS_JOYSTICK) != 0) {
+<span class="lineno">1620</span>                             if (range.<span class="errorspan">getAxis() == MotionEvent.AXIS_HAT_X ||</span>
+<span class="lineno">1621</span>                                 range.getAxis() == MotionEvent.AXIS_HAT_Y) {
+<span class="lineno">1622</span>                                 joystick.hats.add(range);
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1621</span>: <span class="message">Call requires API level 12 (current min is 1): android.view.InputDevice.MotionRange#getAxis</span><br /><pre class="errorlines">
+<span class="lineno">1618</span>                     for (InputDevice.MotionRange range : ranges ) {
+<span class="lineno">1619</span>                         if ((range.getSource() &amp; InputDevice.SOURCE_CLASS_JOYSTICK) != 0) {
+<span class="lineno">1620</span>                             if (range.getAxis() == MotionEvent.AXIS_HAT_X ||
+<span class="lineno">1621</span>                                 range.<span class="errorspan">getAxis() == MotionEvent.AXIS_HAT_Y) {</span>
+<span class="lineno">1622</span>                                 joystick.hats.add(range);
+<span class="lineno">1623</span>                             }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1673</span>: <span class="message">Call requires API level 9 (current min is 1): android.view.MotionEvent#getSource</span><br /><pre class="errorlines">
+<span class="lineno">1670</span> 
+<span class="lineno">1671</span>     @Override
+<span class="lineno">1672</span>     public boolean handleMotionEvent(MotionEvent event) {
+<span class="lineno">1673</span>         if ((event.<span class="errorspan">getSource() &amp; InputDevice.SOURCE_JOYSTICK) != 0) {</span>
+<span class="lineno">1674</span>             int actionPointerIndex = event.getActionIndex();
+<span class="lineno">1675</span>             int action = event.getActionMasked();
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1674</span>: <span class="message">Call requires API level 8 (current min is 1): android.view.MotionEvent#getActionIndex</span><br /><pre class="errorlines">
+<span class="lineno">1671</span>     @Override
+<span class="lineno">1672</span>     public boolean handleMotionEvent(MotionEvent event) {
+<span class="lineno">1673</span>         if ((event.getSource() &amp; InputDevice.SOURCE_JOYSTICK) != 0) {
+<span class="lineno">1674</span>             int actionPointerIndex = event.<span class="errorspan">getActionIndex();</span>
+<span class="lineno">1675</span>             int action = event.getActionMasked();
+<span class="lineno">1676</span>             switch(action) {
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1675</span>: <span class="message">Call requires API level 8 (current min is 1): android.view.MotionEvent#getActionMasked</span><br /><pre class="errorlines">
+<span class="lineno">1672</span>     public boolean handleMotionEvent(MotionEvent event) {
+<span class="lineno">1673</span>         if ((event.getSource() &amp; InputDevice.SOURCE_JOYSTICK) != 0) {
+<span class="lineno">1674</span>             int actionPointerIndex = event.getActionIndex();
+<span class="lineno">1675</span>             int action = event.<span class="errorspan">getActionMasked();</span>
+<span class="lineno">1676</span>             switch(action) {
+<span class="lineno">1677</span>                 case MotionEvent.ACTION_MOVE:
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1683</span>: <span class="message">Call requires API level 12 (current min is 1): android.view.InputDevice.MotionRange#getAxis</span><br /><pre class="errorlines">
+<span class="lineno">1680</span>                         for (int i = 0; i &lt; joystick.axes.size(); i++) {
+<span class="lineno">1681</span>                             InputDevice.MotionRange range = joystick.axes.get(i);
+<span class="lineno">1682</span>                             /* Normalize the value to -1...1 */
+<span class="lineno">1683</span>                             float value = ( event.getAxisValue( range.<span class="errorspan">getAxis(), actionPointerIndex) - range.getMin() ) / range.getRange() * 2.0f - 1.0f;</span>
+<span class="lineno">1684</span>                             SDLActivity.onNativeJoy(joystick.device_id, i, value );
+<span class="lineno">1685</span>                         }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1683</span>: <span class="message">Call requires API level 12 (current min is 1): android.view.MotionEvent#getAxisValue</span><br /><pre class="errorlines">
+<span class="lineno">1680</span>                         for (int i = 0; i &lt; joystick.axes.size(); i++) {
+<span class="lineno">1681</span>                             InputDevice.MotionRange range = joystick.axes.get(i);
+<span class="lineno">1682</span>                             /* Normalize the value to -1...1 */
+<span class="lineno">1683</span>                             float value = ( event.<span class="errorspan">getAxisValue( range.getAxis(), actionPointerIndex) - range.getMin() ) / range.getRange() * 2.0f - 1.0f;</span>
+<span class="lineno">1684</span>                             SDLActivity.onNativeJoy(joystick.device_id, i, value );
+<span class="lineno">1685</span>                         }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1683</span>: <span class="message">Call requires API level 9 (current min is 1): android.view.InputDevice.MotionRange#getMin</span><br /><pre class="errorlines">
+<span class="lineno">1680</span>                         for (int i = 0; i &lt; joystick.axes.size(); i++) {
+<span class="lineno">1681</span>                             InputDevice.MotionRange range = joystick.axes.get(i);
+<span class="lineno">1682</span>                             /* Normalize the value to -1...1 */
+<span class="lineno">1683</span>                             float value = ( event.getAxisValue( range.getAxis(), actionPointerIndex) - range.<span class="errorspan">getMin() ) / range.getRange() * 2.0f - 1.0f;</span>
+<span class="lineno">1684</span>                             SDLActivity.onNativeJoy(joystick.device_id, i, value );
+<span class="lineno">1685</span>                         }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1683</span>: <span class="message">Call requires API level 9 (current min is 1): android.view.InputDevice.MotionRange#getRange</span><br /><pre class="errorlines">
+<span class="lineno">1680</span>                         for (int i = 0; i &lt; joystick.axes.size(); i++) {
+<span class="lineno">1681</span>                             InputDevice.MotionRange range = joystick.axes.get(i);
+<span class="lineno">1682</span>                             /* Normalize the value to -1...1 */
+<span class="lineno">1683</span>                             float value = ( event.getAxisValue( range.getAxis(), actionPointerIndex) - range.getMin() ) / range.<span class="errorspan">getRange() * 2.0f - 1.0f;</span>
+<span class="lineno">1684</span>                             SDLActivity.onNativeJoy(joystick.device_id, i, value );
+<span class="lineno">1685</span>                         }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1687</span>: <span class="message">Call requires API level 12 (current min is 1): android.view.InputDevice.MotionRange#getAxis</span><br /><pre class="errorlines">
+<span class="lineno">1684</span>                             SDLActivity.onNativeJoy(joystick.device_id, i, value );
+<span class="lineno">1685</span>                         }
+<span class="lineno">1686</span>                         for (int i = 0; i &lt; joystick.hats.size(); i+=2) {
+<span class="lineno">1687</span>                             int hatX = Math.round(event.getAxisValue( joystick.hats.get(i).<span class="errorspan">getAxis(), actionPointerIndex ) );</span>
+<span class="lineno">1688</span>                             int hatY = Math.round(event.getAxisValue( joystick.hats.get(i+1).getAxis(), actionPointerIndex ) );
+<span class="lineno">1689</span>                             SDLActivity.onNativeHat(joystick.device_id, i/2, hatX, hatY );
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1687</span>: <span class="message">Call requires API level 12 (current min is 1): android.view.MotionEvent#getAxisValue</span><br /><pre class="errorlines">
+<span class="lineno">1684</span>                             SDLActivity.onNativeJoy(joystick.device_id, i, value );
+<span class="lineno">1685</span>                         }
+<span class="lineno">1686</span>                         for (int i = 0; i &lt; joystick.hats.size(); i+=2) {
+<span class="lineno">1687</span>                             int hatX = Math.round(event.<span class="errorspan">getAxisValue( joystick.hats.get(i).getAxis(), actionPointerIndex ) );</span>
+<span class="lineno">1688</span>                             int hatY = Math.round(event.getAxisValue( joystick.hats.get(i+1).getAxis(), actionPointerIndex ) );
+<span class="lineno">1689</span>                             SDLActivity.onNativeHat(joystick.device_id, i/2, hatX, hatY );
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1688</span>: <span class="message">Call requires API level 12 (current min is 1): android.view.InputDevice.MotionRange#getAxis</span><br /><pre class="errorlines">
+<span class="lineno">1685</span>                         }
+<span class="lineno">1686</span>                         for (int i = 0; i &lt; joystick.hats.size(); i+=2) {
+<span class="lineno">1687</span>                             int hatX = Math.round(event.getAxisValue( joystick.hats.get(i).getAxis(), actionPointerIndex ) );
+<span class="lineno">1688</span>                             int hatY = Math.round(event.getAxisValue( joystick.hats.get(i+1).<span class="errorspan">getAxis(), actionPointerIndex ) );</span>
+<span class="lineno">1689</span>                             SDLActivity.onNativeHat(joystick.device_id, i/2, hatX, hatY );
+<span class="lineno">1690</span>                         }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1688</span>: <span class="message">Call requires API level 12 (current min is 1): android.view.MotionEvent#getAxisValue</span><br /><pre class="errorlines">
+<span class="lineno">1685</span>                         }
+<span class="lineno">1686</span>                         for (int i = 0; i &lt; joystick.hats.size(); i+=2) {
+<span class="lineno">1687</span>                             int hatX = Math.round(event.getAxisValue( joystick.hats.get(i).getAxis(), actionPointerIndex ) );
+<span class="lineno">1688</span>                             int hatY = Math.round(event.<span class="errorspan">getAxisValue( joystick.hats.get(i+1).getAxis(), actionPointerIndex ) );</span>
+<span class="lineno">1689</span>                             SDLActivity.onNativeHat(joystick.device_id, i/2, hatX, hatY );
+<span class="lineno">1690</span>                         }
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1701</span>: <span class="message">Class requires API level 12 (current min is 1): android.view.View.OnGenericMotionListener</span><br /><pre class="errorlines">
+<span class="lineno">1698</span>     }
+<span class="lineno">1699</span> }
+<span class="lineno">1700</span> 
+<span class="lineno">1701</span> class SDLGenericMotionListener_API12 implements View.<span class="errorspan">OnGenericMotionListener {</span>
+<span class="lineno">1702</span>     // Generic Motion (mouse hover, joystick...) events go here
+<span class="lineno">1703</span>     @Override
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1708</span>: <span class="message">Call requires API level 9 (current min is 1): android.view.MotionEvent#getSource</span><br /><pre class="errorlines">
+<span class="lineno">1705</span>         float x, y;
+<span class="lineno">1706</span>         int action;
+<span class="lineno">1707</span> 
+<span class="lineno">1708</span>         switch ( event.<span class="errorspan">getSource() ) {</span>
+<span class="lineno">1709</span>             case InputDevice.SOURCE_JOYSTICK:
+<span class="lineno">1710</span>             case InputDevice.SOURCE_GAMEPAD:
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1715</span>: <span class="message">Call requires API level 8 (current min is 1): android.view.MotionEvent#getActionMasked</span><br /><pre class="errorlines">
+<span class="lineno">1712</span>                 return SDLActivity.handleJoystickMotionEvent(event);
+<span class="lineno">1713</span> 
+<span class="lineno">1714</span>             case InputDevice.SOURCE_MOUSE:
+<span class="lineno">1715</span>                 action = event.<span class="errorspan">getActionMasked();</span>
+<span class="lineno">1716</span>                 switch (action) {
+<span class="lineno">1717</span>                     case MotionEvent.ACTION_SCROLL:
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1718</span>: <span class="message">Call requires API level 12 (current min is 1): android.view.MotionEvent#getAxisValue</span><br /><pre class="errorlines">
+<span class="lineno">1715</span>                 action = event.getActionMasked();
+<span class="lineno">1716</span>                 switch (action) {
+<span class="lineno">1717</span>                     case MotionEvent.ACTION_SCROLL:
+<span class="lineno">1718</span>                         x = event.<span class="errorspan">getAxisValue(MotionEvent.AXIS_HSCROLL, 0);</span>
+<span class="lineno">1719</span>                         y = event.getAxisValue(MotionEvent.AXIS_VSCROLL, 0);
+<span class="lineno">1720</span>                         SDLActivity.onNativeMouse(0, action, x, y);
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1719</span>: <span class="message">Call requires API level 12 (current min is 1): android.view.MotionEvent#getAxisValue</span><br /><pre class="errorlines">
+<span class="lineno">1716</span>                 switch (action) {
+<span class="lineno">1717</span>                     case MotionEvent.ACTION_SCROLL:
+<span class="lineno">1718</span>                         x = event.getAxisValue(MotionEvent.AXIS_HSCROLL, 0);
+<span class="lineno">1719</span>                         y = event.<span class="errorspan">getAxisValue(MotionEvent.AXIS_VSCROLL, 0);</span>
+<span class="lineno">1720</span>                         SDLActivity.onNativeMouse(0, action, x, y);
+<span class="lineno">1721</span>                         return true;
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1724</span>: <span class="message">Call requires API level 5 (current min is 1): android.view.MotionEvent#getX</span><br /><pre class="errorlines">
+<span class="lineno">1721</span>                         return true;
+<span class="lineno">1722</span> 
+<span class="lineno">1723</span>                     case MotionEvent.ACTION_HOVER_MOVE:
+<span class="lineno">1724</span>                         x = event.<span class="errorspan">getX(0);</span>
+<span class="lineno">1725</span>                         y = event.getY(0);
+<span class="lineno">1726</span> 
+</pre>
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1725</span>: <span class="message">Call requires API level 5 (current min is 1): android.view.MotionEvent#getY</span><br /><pre class="errorlines">
+<span class="lineno">1722</span> 
+<span class="lineno">1723</span>                     case MotionEvent.ACTION_HOVER_MOVE:
+<span class="lineno">1724</span>                         x = event.getX(0);
+<span class="lineno">1725</span>                         y = event.<span class="errorspan">getY(0);</span>
+<span class="lineno">1726</span> 
+<span class="lineno">1727</span>                         SDLActivity.onNativeMouse(0, action, x, y);
+</pre>
+</div>
+</div>
+<div class="metadata">Note: This issue has an associated quickfix operation in Eclipse/ADT&nbsp;<img alt="Fix" border="0" align="top" src="lint-results_files/lint-run.png" />
+<br>
+Priority: 6 / 10<br/>
+Category: Correctness</div>
+Severity: <span class="error">Error</span><div class="summary">
+Explanation: Finds API accesses to APIs that are not supported in all targeted API versions.</div>
+<div class="explanation">
+This check scans through all the Android API calls in the application and warns about any calls that are not available on <b>all</b> versions targeted by this application (according to its minimum SDK attribute in the manifest).<br/>
+<br/>
+If you really want to use this API and don't need to support older devices just set the <code>minSdkVersion</code> in your <code>AndroidManifest.xml</code> file.<br/>
+If your code is <b>deliberately</b> accessing newer APIs, and you have ensured (e.g. with conditional execution) that this code will only ever be called on a supported platform, then you can annotate your class or method with the <code>@TargetApi</code> annotation specifying the local minimum SDK to apply, such as <code>@TargetApi(11)</code>, such that this check considers 11 rather than your manifest file's minimum SDK as the required API level.<br/>
+<br/>
+If you are deliberately setting <code>android:</code> attributes in style definitions, make sure you place this in a <code>values-v11</code> folder in order to avoid running into runtime conflicts on certain devices where manufacturers have added custom attributes whose ids conflict with the new ones on later platforms.<br/>
+<br/>
+Similarly, you can use tools:targetApi="11" in an XML file to indicate that the element will only be inflated in an adequate context.
+</div>
+<br/><div class="moreinfo">More info: </div><br/>To suppress this error, use the issue id "NewApi" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
+
+<a name="Performance"></a>
+<div class="category"><a href="#" title="Return to top">Performance</a><div class="categorySeparator"></div>
+</div>
+<a name="UnusedResources"></a>
+<div class="issue">
+<div class="id"><a href="#" title="Return to top">UnusedResources: Unused resources</a><div class="issueSeparator"></div>
+</div>
+<div class="warningslist">
+<span class="location"><a href="../../src/main/res/layout/main.xml">../../src/main/res/layout/main.xml</a></span>: <span class="message">The resource R.layout.main appears to be unused</span><br />
+</div>
+<div class="metadata">Priority: 3 / 10<br/>
+Category: Performance</div>
+Severity: <span class="warning">Warning</span><div class="summary">
+Explanation: Looks for unused resources.</div>
+<div class="explanation">
+Unused resources make applications larger and slow down builds.
+</div>
+<br/><div class="moreinfo">More info: </div><br/>To suppress this error, use the issue id "UnusedResources" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
+
+<a name="Accessibility"></a>
+<div class="category"><a href="#" title="Return to top">Accessibility</a><div class="categorySeparator"></div>
+</div>
+<a name="ClickableViewAccessibility"></a>
+<div class="issue">
+<div class="id"><a href="#" title="Return to top">ClickableViewAccessibility: Accessibility in Custom Views</a><div class="issueSeparator"></div>
+</div>
+<div class="warningslist">
+<span class="location"><a href="../../src/main/java/org/libsdl/app/SDLActivity.java">../../src/main/java/org/libsdl/app/SDLActivity.java</a>:1292</span>: <span class="message">org/libsdl/app/SDLSurface#onTouch should call View#performClick when a click is detected</span><br /><pre class="errorlines">
+<span class="lineno">1289</span> 
+<span class="lineno">1290</span>     // Touch events
+<span class="lineno">1291</span>     @Override
+<span class="lineno">1292</span>     public boolean <span class="errorspan">onTouch(View v, MotionEvent event) {</span>
+<span class="lineno">1293</span>         /* Ref: http://developer.android.com/training/gestures/multi.html */
+<span class="lineno">1294</span>         final int touchDevId = event.getDeviceId();
+</pre>
+</div>
+<div class="metadata">Priority: 6 / 10<br/>
+Category: Accessibility</div>
+Severity: <span class="warning">Warning</span><div class="summary">
+Explanation: Checks that custom views handle accessibility on click events.</div>
+<div class="explanation">
+If a <code>View</code> that overrides <code>onTouchEvent</code> or uses an <code>OnTouchListener</code> does not also implement <code>performClick</code> and call it when clicks are detected, the <code>View</code> may not handle accessibility actions properly. Logic handling the click actions should ideally be placed in <code>View#performClick</code> as some accessibility services invoke <code>performClick</code> when a click action should occur.
+</div>
+<br/><div class="moreinfo">More info: </div><br/>To suppress this error, use the issue id "ClickableViewAccessibility" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
+
+<a name="Internationalization"></a>
+<div class="category"><a href="#" title="Return to top">Internationalization</a><div class="categorySeparator"></div>
+</div>
+<a name="HardcodedText"></a>
+<div class="issue">
+<div class="id"><a href="#" title="Return to top">HardcodedText: Hardcoded text</a><div class="issueSeparator"></div>
+</div>
+<div class="warningslist">
+<span class="location"><a href="../../src/main/res/layout/main.xml">../../src/main/res/layout/main.xml</a>:10</span>: <span class="message">[I18N] Hardcoded string "Hello World, SDLActivity", should use @string resource</span><br /><pre class="errorlines">
+<span class="lineno">   7</span> &lt;TextView
+<span class="lineno">   8</span>     android:layout_width="fill_parent"
+<span class="lineno">   9</span>     android:layout_height="wrap_content"
+<span class="lineno">  10</span>     <span class="errorspan">android:text="Hello World, SDLActivity"</span>
+<span class="lineno">  11</span>     />
+<span class="lineno">  12</span> &lt;/LinearLayout>
+</pre>
+</div>
+<div class="metadata">Note: This issue has an associated quickfix operation in Eclipse/ADT&nbsp;<img alt="Fix" border="0" align="top" src="lint-results_files/lint-run.png" />
+<br>
+Priority: 5 / 10<br/>
+Category: Internationalization</div>
+Severity: <span class="warning">Warning</span><div class="summary">
+Explanation: Looks for hardcoded text attributes which should be converted to resource lookup.</div>
+<div class="explanation">
+Hardcoding text attributes directly in layout files is bad for several reasons:<br/>
+<br/>
+* When creating configuration variations (for example for landscape or portrait)you have to repeat the actual text (and keep it up to date when making changes)<br/>
+<br/>
+* The application cannot be translated to other languages by just adding new translations for existing string resources.<br/>
+<br/>
+In Android Studio and Eclipse there are quickfixes to automatically extract this hardcoded string into a resource lookup.
+</div>
+<br/><div class="moreinfo">More info: </div><br/>To suppress this error, use the issue id "HardcodedText" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
+
+<a name="MissingIssues"></a>
+<div class="category">Disabled Checks<div class="categorySeparator"></div>
+</div>
+The following issues were not run by lint, either because the check is not enabled by default, or because it was disabled with a command line flag or via one or more lint.xml configuration files in the project directories.
+<br/><br/>
+<a name="BackButton"></a>
+<div class="issue">
+<div class="id">BackButton<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Default<br/>
+Priority: 6 / 10<br/>
+Category: Usability</div>
+Severity: <span class="warning">Warning</span><div class="summary">
+Explanation: Looks for Back buttons, which are not common on the Android platform.</div>
+<div class="explanation">
+According to the Android Design Guide,<br/>
+<br/>
+"Other platforms use an explicit back button with label to allow the user to navigate up the application's hierarchy. Instead, Android uses the main action bar's app icon for hierarchical navigation and the navigation bar's back button for temporal navigation."<br/>
+This check is not very sophisticated (it just looks for buttons with the label "Back"), so it is disabled by default to not trigger on common scenarios like pairs of Back/Next buttons to paginate through screens.
+</div>
+<br/><div class="moreinfo">More info: <a href="http://developer.android.com/design/patterns/pure-android.html">http://developer.android.com/design/patterns/pure-android.html</a>
+</div><br/>To suppress this error, use the issue id "BackButton" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
+<a name="EasterEgg"></a>
+<div class="issue">
+<div class="id">EasterEgg<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Default<br/>
+Priority: 6 / 10<br/>
+Category: Security</div>
+Severity: <span class="warning">Warning</span><div class="summary">
+Explanation: Looks for hidden easter eggs.</div>
+<div class="explanation">
+An "easter egg" is code deliberately hidden in the code, both from potential users and even from other developers. This lint check looks for code which looks like it may be hidden from sight.
+</div>
+<br/><div class="moreinfo">More info: </div><br/>To suppress this error, use the issue id "EasterEgg" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
+<a name="FieldGetter"></a>
+<div class="issue">
+<div class="id">FieldGetter<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Default<br/>
+Priority: 4 / 10<br/>
+Category: Performance</div>
+Severity: <span class="warning">Warning</span><div class="summary">
+Explanation: Suggests replacing uses of getters with direct field access within a class.</div>
+<div class="explanation">
+Accessing a field within the class that defines a getter for that field is at least 3 times faster than calling the getter. For simple getters that do nothing other than return the field, you might want to just reference the local field directly instead.<br/>
+<br/>
+<b>NOTE</b>: As of Android 2.3 (Gingerbread), this optimization is performed automatically by Dalvik, so there is no need to change your code; this is only relevant if you are targeting older versions of Android.
+</div>
+<br/><div class="moreinfo">More info: <a href="http://developer.android.com/guide/practices/design/performance.html#internal_get_set">http://developer.android.com/guide/practices/design/performance.html#internal_get_set</a>
+</div><br/>To suppress this error, use the issue id "FieldGetter" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
+<a name="GradleDynamicVersion"></a>
+<div class="issue">
+<div class="id">GradleDynamicVersion<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Default<br/>
+Priority: 4 / 10<br/>
+Category: Correctness</div>
+Severity: <span class="warning">Warning</span><div class="summary">
+Explanation: Looks for dependencies using a dynamic version rather than a fixed version.</div>
+<div class="explanation">
+Using <code>+</code> in dependencies lets you automatically pick up the latest available version rather than a specific, named version. However, this is not recommended; your builds are not repeatable; you may have tested with a slightly different version than what the build server used. (Using a dynamic version as the major version number is more problematic than using it in the minor version position.)
+</div>
+<br/><div class="moreinfo">More info: </div><br/>To suppress this error, use the issue id "GradleDynamicVersion" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
+<a name="IconExpectedSize"></a>
+<div class="issue">
+<div class="id">IconExpectedSize<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Default<br/>
+Priority: 5 / 10<br/>
+Category: Usability:Icons</div>
+Severity: <span class="warning">Warning</span><div class="summary">
+Explanation: Ensures that launcher icons, notification icons etc have the correct size.</div>
+<div class="explanation">
+There are predefined sizes (for each density) for launcher icons. You should follow these conventions to make sure your icons fit in with the overall look of the platform.
+</div>
+<br/><div class="moreinfo">More info: <a href="http://developer.android.com/design/style/iconography.html">http://developer.android.com/design/style/iconography.html</a>
+</div><br/>To suppress this error, use the issue id "IconExpectedSize" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
+<a name="NewerVersionAvailable"></a>
+<div class="issue">
+<div class="id">NewerVersionAvailable<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Default<br/>
+Priority: 4 / 10<br/>
+Category: Correctness</div>
+Severity: <span class="warning">Warning</span><div class="summary">
+Explanation: Looks for Gradle library dependencies that can be replaced by newer versions.</div>
+<div class="explanation">
+This detector checks with a central repository to see if there are newer versions available for the dependencies used by this project.<br/>
+This is similar to the <code>GradleDependency</code> check, which checks for newer versions available in the Android SDK tools and libraries, but this works with any MavenCentral dependency, and connects to the library every time, which makes it more flexible but also <b>much</b> slower.
+</div>
+<br/><div class="moreinfo">More info: </div><br/>To suppress this error, use the issue id "NewerVersionAvailable" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
+<a name="RtlCompat"></a>
+<div class="issue">
+<div class="id">RtlCompat<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Default<br/>
+Priority: 6 / 10<br/>
+Category: Bi-directional Text</div>
+Severity: <span class="error">Error</span><div class="summary">
+Explanation: Looks for compatibility issues with RTL support.</div>
+<div class="explanation">
+API 17 adds a <code>textAlignment</code> attribute to specify text alignment. However, if you are supporting older versions than API 17, you must <b>also</b> specify a gravity or layout_gravity attribute, since older platforms will ignore the <code>textAlignment</code> attribute.
+</div>
+<br/><div class="moreinfo">More info: </div><br/>To suppress this error, use the issue id "RtlCompat" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
+<a name="RtlEnabled"></a>
+<div class="issue">
+<div class="id">RtlEnabled<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Default<br/>
+Priority: 3 / 10<br/>
+Category: Bi-directional Text</div>
+Severity: <span class="warning">Warning</span><div class="summary">
+Explanation: Looks for usages of right-to-left text constants without enabling RTL support.</div>
+<div class="explanation">
+To enable right-to-left support, when running on API 17 and higher, you must set the <code>android:supportsRtl</code> attribute in the manifest <code>&lt;application></code> element.<br/>
+If you have started adding RTL attributes, but have not yet finished the migration, you can set the attribute to false to satisfy this lint check.
+</div>
+<br/><div class="moreinfo">More info: </div><br/>To suppress this error, use the issue id "RtlEnabled" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
+<a name="RtlHardcoded"></a>
+<div class="issue">
+<div class="id">RtlHardcoded<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Default<br/>
+Priority: 5 / 10<br/>
+Category: Bi-directional Text</div>
+Severity: <span class="warning">Warning</span><div class="summary">
+Explanation: Looks for hardcoded left/right constants which could be start/end for bidirectional text.</div>
+<div class="explanation">
+Using <code>Gravity#LEFT</code> and <code>Gravity#RIGHT</code> can lead to problems when a layout is rendered in locales where text flows from right to left. Use <code>Gravity#START</code> and <code>Gravity#END</code> instead. Similarly, in XML <code>gravity</code> and <code>layout_gravity</code> attributes, use <code>start</code> rather than <code>left</code>.<br/>
+For XML attributes such as paddingLeft and <code>layout_marginLeft</code>, use <code>paddingStart</code> and <code>layout_marginStart</code>. <b>NOTE</b>: If your <code>minSdkVersion</code> is less than 17, you should add <b>both</b> the older left/right attributes <b>as well as</b> the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.<br/>
+(Note: For <code>Gravity#LEFT</code> and <code>Gravity#START</code>, you can use these constants even when targeting older platforms, because the <code>start</code> bitmask is a superset of the <code>left</code> bitmask. Therefore, you can use <code>gravity="start"</code> rather than <code>gravity="left|start"</code>.)
+</div>
+<br/><div class="moreinfo">More info: </div><br/>To suppress this error, use the issue id "RtlHardcoded" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
+<a name="RtlSymmetry"></a>
+<div class="issue">
+<div class="id">RtlSymmetry<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Default<br/>
+Priority: 6 / 10<br/>
+Category: Bi-directional Text</div>
+Severity: <span class="error">Error</span><div class="summary">
+Explanation: Ensures that specifying padding on one side is matched by padding on the other.</div>
+<div class="explanation">
+If you specify padding or margin on the left side of a layout, you should probably also specify padding on the right side (and vice versa) for right-to-left layout symmetry.
+</div>
+<br/><div class="moreinfo">More info: </div><br/>To suppress this error, use the issue id "RtlSymmetry" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
+<a name="SelectableText"></a>
+<div class="issue">
+<div class="id">SelectableText<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Default<br/>
+Priority: 7 / 10<br/>
+Category: Usability</div>
+Severity: <span class="warning">Warning</span><div class="summary">
+Explanation: Looks for TextViews which should probably allow their text to be selected.</div>
+<div class="explanation">
+If a <code>&lt;TextView></code> is used to display data, the user might want to copy that data and paste it elsewhere. To allow this, the <code>&lt;TextView></code> should specify <code>android:textIsSelectable="true"</code>.<br/>
+<br/>
+This lint check looks for TextViews which are likely to be displaying data: views whose text is set dynamically. This value will be ignored on platforms older than API 11, so it is okay to set it regardless of your <code>minSdkVersion</code>.
+</div>
+<br/><div class="moreinfo">More info: </div><br/>To suppress this error, use the issue id "SelectableText" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
+<a name="StopShip"></a>
+<div class="issue">
+<div class="id">StopShip<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Default<br/>
+Priority: 10 / 10<br/>
+Category: Correctness</div>
+Severity: <span class="warning">Warning</span><div class="summary">
+Explanation: Looks for comment markers of the form <code>//STOPSHIP</code> which indicates that code should not be released yet.</div>
+<div class="explanation">
+Using the comment <code>// STOPSHIP</code> can be used to flag code that is incomplete but checked in. This comment marker can be used to indicate that the code should not be shipped until the issue is addressed, and lint will look for these.
+</div>
+<br/><div class="moreinfo">More info: </div><br/>To suppress this error, use the issue id "StopShip" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
+<a name="TypographyQuotes"></a>
+<div class="issue">
+<div class="id">TypographyQuotes<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Note: This issue has an associated quickfix operation in Eclipse/ADT&nbsp;<img alt="Fix" border="0" align="top" src="lint-results_files/lint-run.png" />
+<br>
+Disabled By: Default<br/>
+Priority: 5 / 10<br/>
+Category: Usability:Typography</div>
+Severity: <span class="warning">Warning</span><div class="summary">
+Explanation: Looks for straight quotes which can be replaced by curvy quotes.</div>
+<div class="explanation">
+Straight single quotes and double quotes, when used as a pair, can be replaced by "curvy quotes" (or directional quotes). This can make the text more readable.<br/>
+<br/>
+Note that you should never use grave accents and apostrophes to quote, `like this'.<br/>
+<br/>
+(Also note that you should not use curvy quotes for code fragments.)
+</div>
+<br/><div class="moreinfo">More info: <a href="http://en.wikipedia.org/wiki/Quotation_mark">http://en.wikipedia.org/wiki/Quotation_mark</a>
+</div><br/>To suppress this error, use the issue id "TypographyQuotes" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
+<a name="UnusedIds"></a>
+<div class="issue">
+<div class="id">UnusedIds<div class="issueSeparator"></div>
+</div>
+<div class="metadata">Disabled By: Default<br/>
+Priority: 1 / 10<br/>
+Category: Performance</div>
+Severity: <span class="warning">Warning</span><div class="summary">
+Explanation: Looks for unused id's.</div>
+<div class="explanation">
+This resource id definition appears not to be needed since it is not referenced from anywhere. Having id definitions, even if unused, is not necessarily a bad idea since they make working on layouts and menus easier, so there is not a strong reason to delete these.
+</div>
+<br/><div class="moreinfo">More info: </div><br/>To suppress this error, use the issue id "UnusedIds" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
+
+<a name="SuppressInfo"></a>
+<div class="category">Suppressing Warnings and Errors<div class="categorySeparator"></div>
+</div>
+Lint errors can be suppressed in a variety of ways:<br/>
+<br/>
+1. With a @SuppressLint annotation in the Java code<br/>
+2. With a tools:ignore attribute in the XML file<br/>
+3. With a lint.xml configuration file in the project<br/>
+4. With a lint.xml configuration file passed to lint via the --config flag<br/>
+5. With the --ignore flag passed to lint.<br/>
+<br/>
+To suppress a lint warning with an annotation, add a @SuppressLint("id") annotation on the class, method or variable declaration closest to the warning instance you want to disable. The id can be one or more issue id's, such as "UnusedResources" or {"UnusedResources","UnusedIds"}, or it can be "all" to suppress all lint warnings in the given scope.<br/>
+<br/>
+To suppress a lint warning in an XML file, add a tools:ignore="id" attribute on the element containing the error, or one of its surrounding elements. You also need to define the namespace for the tools prefix on the root element in your document, next to the xmlns:android declaration:<br/>
+* xmlns:tools="http://schemas.android.com/tools"<br/>
+<br/>
+To suppress lint warnings with a configuration XML file, create a file named lint.xml and place it at the root directory of the project in which it applies. (If you use the Eclipse plugin's Lint view, you can suppress errors there via the toolbar and Eclipse will create the lint.xml file for you.).<br/>
+<br/>
+The format of the lint.xml file is something like the following:<br/>
+<br/>
+&lt;?xml version="1.0" encoding="UTF-8"?><br/>
+&lt;lint><br/>
+    &lt;!-- Disable this given check in this project --><br/>
+    &lt;issue id="IconMissingDensityFolder" severity="ignore" /><br/>
+<br/>
+    &lt;!-- Ignore the ObsoleteLayoutParam issue in the given files --><br/>
+    &lt;issue id="ObsoleteLayoutParam"><br/>
+        &lt;ignore path="res/layout/activation.xml" /><br/>
+        &lt;ignore path="res/layout-xlarge/activation.xml" /><br/>
+    &lt;/issue><br/>
+<br/>
+    &lt;!-- Ignore the UselessLeaf issue in the given file --><br/>
+    &lt;issue id="UselessLeaf"><br/>
+        &lt;ignore path="res/layout/main.xml" /><br/>
+    &lt;/issue><br/>
+<br/>
+    &lt;!-- Change the severity of hardcoded strings to "error" --><br/>
+    &lt;issue id="HardcodedText" severity="error" /><br/>
+&lt;/lint><br/>
+<br/>
+To suppress lint checks from the command line, pass the --ignore flag with a comma separated list of ids to be suppressed, such as:<br/>
+"lint --ignore UnusedResources,UselessLeaf /my/project/path"<br/>
+
+
+</body>
+</html>
